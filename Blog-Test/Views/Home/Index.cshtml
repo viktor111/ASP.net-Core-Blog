@@ -1,0 +1,17 @@
+﻿@model Blog_Test.ViewModels.IndexViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Blog</h1>
+    <table class="table">
+        @foreach (var article in Model.Articles)
+        {
+            <tr>
+                <td>
+                    <h1 class="text-primary"><a href="home/details/@article.Id">@article.Title</a></h1>
+                </td>
+                <td><span class="text-info">Category:   </span>@article.Category</td>
+                <td><span class="text-info">Author:   </span>@article.Author</td>
+            </tr>
+        }
+    </table>
+</div>
