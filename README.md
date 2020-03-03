@@ -9,10 +9,12 @@ open solution
 ```
 ### Prerequisites
 (To run localy)
+```
 -Dotnet 3.1
 -Visual Studio
 -Entity Framework Core
 -Asp.net Core 3.1
+```
 
 ## Built With
 
