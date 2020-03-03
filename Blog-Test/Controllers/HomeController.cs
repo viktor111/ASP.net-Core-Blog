@@ -13,15 +13,14 @@ namespace Blog_Test.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private IArticleData _articleData;
 
-        public HomeController(ILogger<HomeController> logger, IArticleData articleData)
+        public HomeController(IArticleData articleData)
         {
-            _logger = logger;
             _articleData = articleData;
         }
-            
+          
+        [HttpGet]
         public IActionResult Index()
         {
             var model = new IndexViewModel();
@@ -30,11 +29,13 @@ namespace Blog_Test.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var model = _articleData.GetArticle(id);
@@ -42,10 +43,32 @@ namespace Blog_Test.Controllers
             return View(model);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet]        
+        public IActionResult Create() 
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ArticleEdditData model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newArticle = new Article();
+                newArticle.Title = model.Title;
+                newArticle.Author = model.Author;
+                newArticle.Category = model.Category;
+                newArticle.Content = model.Content;
+
+                newArticle = _articleData.PostArticle(newArticle);
+
+                return RedirectToAction(nameof(Details), new { id = newArticle.Id });
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

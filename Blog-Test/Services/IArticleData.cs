@@ -10,5 +10,6 @@ namespace Blog_Test.Services
     {
         IEnumerable<Article> GetArticles();
         Article GetArticle(int id);
+        Article PostArticle(Article article);
     }
 }

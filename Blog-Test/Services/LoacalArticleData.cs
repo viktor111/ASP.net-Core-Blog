@@ -28,6 +28,13 @@ namespace Blog_Test.Services
             return _articles.FirstOrDefault(a => a.Id == id);
         }
 
+        public Article PostArticle(Article article)
+        {
+            article.Id = _articles.Max(r => r.Id) + 1;
+            _articles.Add(article);
+            return article;
+        }
+
         List<Article> _articles;
     }
 }
