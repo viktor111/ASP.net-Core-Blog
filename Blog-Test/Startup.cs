@@ -28,7 +28,7 @@ namespace Blog_Test
         {
             services.AddControllersWithViews();
             services.AddDbContext<BlogDbContext>
-               (opt => opt.UseSqlServer(Configuration.GetConnectionString("DevSpacer")));            
+               (opt => opt.UseSqlServer(Configuration.GetConnectionString("Blog")));            
             services.AddScoped<IArticleData, SqlArticleData>();
 
         }

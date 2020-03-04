@@ -43,6 +43,35 @@ namespace Blog_Test.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Eddit(int id)
+        {
+            var model = _articleData.GetArticle(id);
+
+            return View(model);
+        }
+
+        public IActionResult Eddit(Article model)
+        {
+            if (ModelState.IsValid)
+            {
+                var updatedAricle = new Article();
+                updatedAricle.Id = model.Id;
+                updatedAricle.Title = model.Title;
+                updatedAricle.Author = model.Author;
+                updatedAricle.Category = model.Category;
+                updatedAricle.Content = model.Content;
+
+                updatedAricle = _articleData.EdditArticle(updatedAricle);
+
+                return RedirectToAction(nameof(Details), new { id = updatedAricle.Id });
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         [HttpGet]        
         public IActionResult Create() 
         {
