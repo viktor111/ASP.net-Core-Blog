@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog_Test.Data;
 using Blog_Test.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +27,10 @@ namespace Blog_Test
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IArticleData, LoacalArticleData>();
+            services.AddDbContext<BlogDbContext>
+               (opt => opt.UseSqlServer(Configuration.GetConnectionString("DevSpacer")));            
+            services.AddScoped<IArticleData, SqlArticleData>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

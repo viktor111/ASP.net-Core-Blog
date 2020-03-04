@@ -8,6 +8,7 @@ namespace Blog_Test.Services
 {
     public interface IArticleData
     {
+
         IEnumerable<Article> GetArticles();
         Article GetArticle(int id);
         Article PostArticle(Article article);
