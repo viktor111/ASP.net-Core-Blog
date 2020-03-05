@@ -4,7 +4,9 @@ Blog application made with asp.net core mvc and EF core.
 ## Get started
 ```
 git clone https://github.com/viktor111/ASP.net-Core-Blog.git
-cd ../ASP.net-Core-Blog
+cd ../ASP.net-Core-Blog/Blog-Test
+dotnet ef migrations add InitialCreate
+dotnet ef database update
 open solution
 ```
 ### Prerequisites
@@ -12,6 +14,7 @@ open solution
 ```
 -Dotnet 3.1
 -Visual Studio
+-dotnet ef cli -run this command to install-(dotnet tool install --global dotnet-ef)
 -Entity Framework Core
 -Asp.net Core 3.1
 ```
