@@ -1,0 +1,28 @@
+﻿@using Blog_Test.Models
+@model Blog_Test.Models.Article
+
+<h1 class="h1">Create New Blog Article</h1>
+<div class="jumbotron">
+    <form method="post">
+        <div>
+            <label asp-for="Title"></label>
+            <input asp-for="Title" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label asp-for="Author"></label>
+            <input asp-for="Author" />
+            <span asp-validation-for="Author"></span>
+        </div>
+        <div>
+            <select asp-for="Category" asp-items="@Html.GetEnumSelectList<CategoryType>()"></select>
+            <span asp-validation-for="Category"></span>
+        </div>
+        <div>
+            <label asp-for="Content"></label>
+            <input asp-for="Content" />
+            <span asp-validation-for="Content"></span>
+        </div>
+        <input type="submit" name="save" value="Save" />
+    </form>
+</div>

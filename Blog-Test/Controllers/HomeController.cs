@@ -30,12 +30,6 @@ namespace Blog_Test.Controllers
         }
 
         [HttpGet]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public IActionResult Details(int id)
         {
             var model = _articleData.GetArticle(id);
