@@ -19,7 +19,7 @@ namespace Blog_Test.Controllers
         {
             _articleData = articleData;
         }
-          
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -51,6 +51,16 @@ namespace Blog_Test.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+
+            _articleData.DeleteArticle(id);
+           
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
         public IActionResult Eddit(Article model)
         {
             if (ModelState.IsValid)
@@ -72,8 +82,8 @@ namespace Blog_Test.Controllers
             }
         }
 
-        [HttpGet]        
-        public IActionResult Create() 
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }

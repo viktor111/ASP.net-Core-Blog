@@ -12,10 +12,16 @@
                 <td><span class="text-info">Category: </span>@article.Category</td>
                 <td><span class="text-info">Author: </span>@article.Author</td>
                 <td>
-                    <a href="home/eddit/@article.Id" class="btn-info">Eddit</a>
+                    <a href="home/eddit/@article.Id" class="btn-primary">Eddit</a>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-controller="Home" asp-route-id="@article.Id" method="post">
+                        <input type="submit" value="Delete" class="btn btn-primary" />
+                    </form>
                 </td>
             </tr>
+            <tr>
+            </tr>
         }
-    </table>    
+    </table>
 </div>
-<div class="float-left btn-info"> <a href="home/create" class="text-dark">Create Post</a></div>

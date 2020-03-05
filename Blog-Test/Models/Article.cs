@@ -16,15 +16,13 @@ namespace Blog_Test.Models
         public string Title { get; set; }
 
         [Required]
-
         public string Content { get; set; }
 
         [Required]
         [MaxLength(60)]
         public string Author { get; set; }
 
-        [Required]
-        
+        [Required]        
         public CategoryType Category { get; set; }
     }
 }

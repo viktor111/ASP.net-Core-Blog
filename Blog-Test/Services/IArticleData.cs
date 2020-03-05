@@ -12,5 +12,6 @@ namespace Blog_Test.Services
         Article GetArticle(int id);
         Article PostArticle(Article article);
         Article EdditArticle(Article article);
+        Article DeleteArticle(int id);
     }
 }
