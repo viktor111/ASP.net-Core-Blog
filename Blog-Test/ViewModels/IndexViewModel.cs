@@ -8,6 +8,11 @@ namespace Blog_Test.ViewModels
 {
     public class IndexViewModel
     {
+
+        public List<string> Preview { get; set; }
+
         public IEnumerable<Article> Articles { get; set; }
+
+
     }
 }

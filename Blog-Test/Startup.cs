@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Blog_Test.Data;
 using Blog_Test.Services;
+using Blog_Test.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,7 +31,7 @@ namespace Blog_Test
             services.AddDbContext<BlogDbContext>
                (opt => opt.UseSqlServer(Configuration.GetConnectionString("Blog")));            
             services.AddScoped<IArticleData, SqlArticleData>();
-
+            services.AddScoped<IPreview, InedxPreview>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

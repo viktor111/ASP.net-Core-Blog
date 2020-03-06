@@ -14,10 +14,12 @@ namespace Blog_Test.Controllers
     public class HomeController : Controller
     {
         private IArticleData _articleData;
+        private IPreview _previewContent;
 
-        public HomeController(IArticleData articleData)
+        public HomeController(IArticleData articleData, IPreview preview)
         {
             _articleData = articleData;
+            _previewContent = preview;
         }
 
         [HttpGet]
@@ -25,7 +27,7 @@ namespace Blog_Test.Controllers
         {
             var model = new IndexViewModel();
             model.Articles = _articleData.GetArticles();
-
+            model.Preview = _previewContent.PreviewArticleContent(_articleData.GetArticles()).ToList();
             return View(model);
         }
 
