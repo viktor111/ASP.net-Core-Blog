@@ -43,7 +43,7 @@ namespace Blog_Test.Controllers
         public IActionResult Eddit(int id)
         {
             var model = _articleData.GetArticle(id);
-
+            
             return View(model);
         }
 
@@ -69,7 +69,7 @@ namespace Blog_Test.Controllers
                 updatedAricle.Content = model.Content;
 
                 updatedAricle = _articleData.EdditArticle(updatedAricle);
-
+                
                 return RedirectToAction(nameof(Details), new { id = updatedAricle.Id });
             }
             else

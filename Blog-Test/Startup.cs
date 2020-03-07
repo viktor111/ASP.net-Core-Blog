@@ -32,6 +32,7 @@ namespace Blog_Test
                (opt => opt.UseSqlServer(Configuration.GetConnectionString("Blog")));            
             services.AddScoped<IArticleData, SqlArticleData>();
             services.AddScoped<IPreview, InedxPreview>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,11 +49,14 @@ namespace Blog_Test
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
@@ -60,6 +64,8 @@ namespace Blog_Test
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+           
         }
     }
 }

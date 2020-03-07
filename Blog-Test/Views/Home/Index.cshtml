@@ -3,7 +3,7 @@
     int counter = 0;
 }
 <div class="text-center">
-    <h1 class="display-4">Welcome To Blog</h1>
+    <h1 class="display-4">Articles</h1>
     <table class="table">
         @foreach (var article in Model.Articles)
         {
@@ -11,16 +11,16 @@
             <tr>
                 <td>
                     <h1 class="text-primary"><a href="home/details/@article.Id">@article.Title</a></h1>
-                    <p>@Model.Preview[counter++]</p>
+                    <p>@Model.Preview[counter++] <a href="home/details/@article.Id">Read More.....</a></p>
                 </td>
                 <td><span class="text-info">Category: </span>@article.Category</td>
                 <td><span class="text-info">Author: </span>@article.Author</td>
                 <td>
-                    <a href="home/eddit/@article.Id" class="btn-primary">Eddit</a>
+                    <a href="home/eddit/@article.Id" class="btn btn-dark">Eddit</a>
                 </td>
                 <td>
                     <form asp-action="Delete" asp-controller="Home" asp-route-id="@article.Id" method="post">
-                        <input type="submit" value="Delete" class="btn btn-primary" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
                     </form>
                 </td>
             </tr>
