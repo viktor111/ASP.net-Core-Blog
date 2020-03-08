@@ -1,0 +1,20 @@
+﻿@model Blog.Models.Article
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h1>@Model.Title</h1>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-left">
+        <span class="text-info">@Model.Author</span>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+        <span class="text-info">@Model.Category</span>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+        @Model.Content
+    </div>
+</div>
