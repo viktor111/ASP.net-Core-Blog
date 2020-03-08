@@ -4,7 +4,7 @@ Blog application made with asp.net core mvc and EF core.
 ## Get started
 ```
 git clone https://github.com/viktor111/ASP.net-Core-Blog.git
-cd ../ASP.net-Core-Blog/Blog-Test
+cd ../ASP.net-Core-Blog
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 open solution
