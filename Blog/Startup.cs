@@ -39,9 +39,9 @@ namespace Blog
             services.AddScoped<IArticleData, SqlArticleData>();
             services.AddScoped<IPreview, IndexPreview>();
 
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -51,8 +51,7 @@ namespace Blog
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/Home/Error");             
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
