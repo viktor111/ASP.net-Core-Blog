@@ -11,24 +11,30 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <div>
-            <a class="btn btn-info" asp-area="" asp-controller="Admin" asp-action="Create">Create</a>
+            <a class="btn btn-success" asp-area="" asp-controller="Admin" asp-action="Create">Create</a>
         </div>
     }
+    <div>
+
+    </div>
     <table class="table">
         @foreach (var article in Model.Articles)
         {
 
             <tr>
                 <td>
+                    <p>@article.Date</p>
+                </td>
+                <td>
                     <h1 class="text-primary"><a href="home/details/@article.Id">@article.Title</a></h1>
-                    <p>@Model.Preview[counter++] <a href="home/details/@article.Id">Read More.....</a></p>
+                    <p class="text-left">@Model.Preview[counter++] <a href="home/details/@article.Id">Read More.....</a></p>
                 </td>
                 <td><span class="text-info">Category: </span>@article.Category</td>
                 <td><span class="text-info">Author: </span>@article.Author</td>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <td>
-                        <a href="admin/eddit/@article.Id" class="btn btn-dark">Eddit</a>
+                        <a href="admin/eddit/@article.Id" class="btn btn-outline-warning">Eddit</a>
                     </td>
                     <td>
                         <form asp-action="Delete" asp-controller="Admin" asp-route-id="@article.Id" method="post">
@@ -39,4 +45,5 @@
             </tr>
         }
     </table>
+</div>
 </div>

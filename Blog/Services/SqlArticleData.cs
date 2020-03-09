@@ -39,7 +39,7 @@ namespace Blog.Services
 
         public IEnumerable<Article> GetArticles()
         {
-            return _context.Articles.OrderBy(a => a.Title);
+            return _context.Articles.OrderByDescending(a => a.Date);
         }
 
         public Article PostArticle(Article article)

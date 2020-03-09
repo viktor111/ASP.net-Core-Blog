@@ -51,7 +51,7 @@ namespace Blog.Controllers
 
                 updatedAricle = _articleData.EdditArticle(updatedAricle);
 
-                return RedirectToAction("Details", "Home",new { id = updatedAricle.Id });
+                return RedirectToAction("Details", "Home", new { id = updatedAricle.Id });
             }
             else
             {
@@ -76,6 +76,7 @@ namespace Blog.Controllers
                 newArticle.Author = model.Author;
                 newArticle.Category = model.Category;
                 newArticle.Content = model.Content;
+                newArticle.Date = DateTime.Now;
 
                 newArticle = _articleData.PostArticle(newArticle);
 

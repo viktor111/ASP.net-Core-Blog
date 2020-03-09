@@ -11,5 +11,7 @@ namespace Blog.ViewModels
         public List<string> Preview { get; set; }
 
         public IEnumerable<Article> Articles { get; set; }
+
+        public SortType Sort { get; set; }
     }
 }

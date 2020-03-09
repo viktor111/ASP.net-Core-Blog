@@ -35,14 +35,20 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(SortType sort)
         {
+            
+
             var model = new IndexViewModel();
             model.Articles = _articleData.GetArticles();
-            model.Preview = _previewContent.PreviewArticleContent(_articleData.GetArticles()).ToList();
+
+            IEnumerable<Article> articles = model.Articles;
+
+            model.Preview = _previewContent.PreviewArticleContent(articles).ToList();
+
             return View(model);
         }
-
+      
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
