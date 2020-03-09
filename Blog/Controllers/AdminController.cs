@@ -48,6 +48,7 @@ namespace Blog.Controllers
                 updatedAricle.Author = model.Author;
                 updatedAricle.Category = model.Category;
                 updatedAricle.Content = model.Content;
+                updatedAricle.Date = DateTime.Now;
 
                 updatedAricle = _articleData.EdditArticle(updatedAricle);
 
@@ -67,7 +68,7 @@ namespace Blog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ArticleEdditData model)
+        public IActionResult Create(ArticeViewModel model)
         {
             if (ModelState.IsValid)
             {

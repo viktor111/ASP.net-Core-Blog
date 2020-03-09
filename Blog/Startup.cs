@@ -39,7 +39,7 @@ namespace Blog
             services.AddRazorPages();
             services.AddScoped<IArticleData, SqlArticleData>();
             services.AddScoped<IPreview, IndexPreview>();
-
+            services.AddScoped<ICommentData, SqlCommentData>();
 
         }
 

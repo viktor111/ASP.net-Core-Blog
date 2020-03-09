@@ -13,5 +13,7 @@ namespace Blog.ViewModels
         public IEnumerable<Article> Articles { get; set; }
 
         public SortType Sort { get; set; }
+
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }
