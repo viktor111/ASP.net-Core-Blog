@@ -26,5 +26,7 @@ namespace Blog.Models
 
         [Required]
         public CategoryType Category { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }
