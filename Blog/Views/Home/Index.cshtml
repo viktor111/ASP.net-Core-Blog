@@ -7,7 +7,6 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 <div class="text-center">
-    <h1 class="display-4">Articles</h1>
     @if (SignInManager.IsSignedIn(User))
     {
         <div>
@@ -23,13 +22,13 @@
 
             <tr>
                 <td>
-                    <p>@article.Date</p>
+                    <p style="color: lightgray">@article.Date</p>
                 </td>
                 <td>
-                    <h1 class="text-primary"><a href="home/details/@article.Id">@article.Title</a></h1>
+                    <h1><a style="color:darkred !important" href="home/details/@article.Id">@article.Title</a></h1>
                     <p class="text-left">@Model.Preview[counter++] <a href="home/details/@article.Id">Read More.....</a></p>
                 </td>
-                <td><span class="text-info">Category: </span>@article.Category</td>
+                <td><span class="text-danger">Category: </span>@article.Category</td>
                 <td><span class="text-info">Author: </span>@article.Author</td>
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -42,7 +41,7 @@
                         </form>
                     </td>
                 }
-            </tr>
+            </tr>            
         }
     </table>
 </div>

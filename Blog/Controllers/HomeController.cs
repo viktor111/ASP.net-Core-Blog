@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Blog.Models;
 using Blog.Services;
-using Blog.ViewModels;
+using Blog.ViewModels;                      
 using Microsoft.AspNetCore.Identity;
 
 namespace Blog.Controllers

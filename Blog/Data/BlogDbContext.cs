@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Data
 {
-    public class BlogDbContext : IdentityDbContext
+    public class BlogDbContext : IdentityDbContext<ApplicationUser>
     {
         public BlogDbContext(DbContextOptions<BlogDbContext> options)
             : base(options)
@@ -28,6 +28,8 @@ namespace Blog.Data
                 HasOne(c => c.Article).
                 WithMany(a => a.Comments).
                 HasForeignKey(c => c.ArticleId);
+
+            
         }
 
         public DbSet<Article> Articles { get; set; }
