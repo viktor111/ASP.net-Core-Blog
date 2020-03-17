@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     int counter = 0;
+    string categoryColor = string.Empty;
 }
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
@@ -25,11 +26,31 @@
                     <p style="color: lightgray">@article.Date</p>
                 </td>
                 <td>
-                    <h1><a style="color:darkred !important" href="home/details/@article.Id">@article.Title</a></h1>
+                    <h1><a style="color: darkred !important" href="home/details/@article.Id">@article.Title</a></h1>
                     <p class="text-left">@Model.Preview[counter++] <a href="home/details/@article.Id">Read More.....</a></p>
                 </td>
-                <td><span class="text-danger">Category: </span>@article.Category</td>
-                <td><span class="text-info">Author: </span>@article.Author</td>
+                @switch (article.Category)
+                {
+                    case CategoryType.general:
+                        categoryColor = "grey";
+                        break;
+                    case CategoryType.web:
+                        categoryColor = "blue";
+                        break;
+                    case CategoryType.AI:
+                        categoryColor = "white";
+                        break;
+                    case CategoryType.hacking:
+                        categoryColor = "green";
+                        break;
+                    case CategoryType.tips:
+                        categoryColor = "burlywood";
+                        break;
+                    default:
+                        break;
+                }
+                <td><span class="text-danger">Category: </span><span style="color: @categoryColor">@article.Category</span></td>
+                <td><span class="text-danger">Author: </span>@article.Author</td>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <td>

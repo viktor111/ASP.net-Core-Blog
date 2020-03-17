@@ -14,7 +14,7 @@ namespace Blog.ViewModels
 
             foreach (var article in Articles)
             {
-                const int allowedPreviewChar = 500;
+                const int allowedPreviewChar = 503;
 
                 string content = article.Content;
                 string previewContent = string.Empty;
