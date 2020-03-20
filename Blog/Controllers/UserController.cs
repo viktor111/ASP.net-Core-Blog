@@ -12,12 +12,10 @@ namespace Blog.Controllers
     {
         private UserManager<ApplicationUser> _user;
 
-
         public UserController(UserManager<ApplicationUser> user)
         {
             _user = user;
         }
-
 
     }
 }

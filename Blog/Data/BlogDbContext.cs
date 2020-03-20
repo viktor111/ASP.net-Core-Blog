@@ -34,5 +34,6 @@ namespace Blog.Data
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Blog.Models.Idea> Idea { get; set; }
     }
 }
