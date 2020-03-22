@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Blog.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
@@ -16,6 +17,6 @@ namespace Blog.Controllers
         {
             _user = user;
         }
-
+        
     }
 }

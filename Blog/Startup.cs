@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Blog.Services;
 using Blog.ViewModels;
 using Blog.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Blog
 {
@@ -33,15 +34,20 @@ namespace Blog
             services.AddDbContext<BlogDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ApplicationUser>(options => 
+
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<BlogDbContext>();
+                //.AddRoles<IdentityRole>()
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IArticleData, SqlArticleData>();
             services.AddScoped<IPreview, IndexPreview>();
             services.AddScoped<ICommentData, SqlCommentData>();

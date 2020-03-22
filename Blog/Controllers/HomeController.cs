@@ -9,6 +9,8 @@ using Blog.Models;
 using Blog.Services;
 using Blog.ViewModels;                      
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace Blog.Controllers
 {
@@ -19,18 +21,23 @@ namespace Blog.Controllers
         private IPreview _previewContent;
         private ICommentData _comment;
         private UserManager<ApplicationUser> _user;
+       // private RoleManager<IdentityRole> _role;
+       private IHttpContextAccessor _context;
 
         public HomeController(IArticleData articleData,
             IPreview preview,
             ILogger<HomeController> logger,
             ICommentData comment,
-            UserManager<ApplicationUser> user)
+            UserManager<ApplicationUser> user,
+            IHttpContextAccessor context
+            )
         {
             _articleData = articleData;
             _previewContent = preview;
             _logger = logger;
             _comment = comment;
             _user = user;
+            _context = context;
         }
 
         [HttpGet]
@@ -53,19 +60,20 @@ namespace Blog.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Comment(Comment comment)
+        {
+            var userId = _context.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-        //[HttpPost]
-        //public IActionResult Comment(Comment comment)
-        //{
+            var newComment = new Comment();
+            newComment.ApplicationUserId = userId;
+            newComment.Date = DateTime.Now;
+            newComment.Content = comment.Content;
 
-        //    var newComment = new Comment();
-        //    newComment.ArticleId = (int)ViewData["Id"];
-        //    newComment.ApplicationUserId = User.Identity.Name;
-        //    newComment.Date = DateTime.Now;
-        //    newComment.Content = comment.Content;
+            _comment.PostComment(newComment);
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return RedirectToAction(nameof(Index));
+        }
 
         [HttpGet]
         public IActionResult Index()
@@ -77,9 +85,15 @@ namespace Blog.Controllers
 
             IEnumerable<Article> articles = model.Articles;
 
-            model.Preview = _previewContent.PreviewArticleContent(articles).ToList();
+            model.Preview = _previewContent.PreviewArticleContent(articles).ToList();        
 
             return View(model);
+        }
+
+        public async Task<IActionResult> UserTestAsync()
+        {
+            var user = await _user.GetUserAsync(this.User);
+            return Json(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -8,6 +8,6 @@ namespace Blog.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public ICollection<Comment> Comments{ get; set; }
+        public List<Comment> Comments{ get; set; }
     }
 }
