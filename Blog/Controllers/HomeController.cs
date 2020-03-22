@@ -66,6 +66,7 @@ namespace Blog.Controllers
             var userId = _context.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var newComment = new Comment();
+            newComment.ArticleId = 1;
             newComment.ApplicationUserId = userId;
             newComment.Date = DateTime.Now;
             newComment.Content = comment.Content;
@@ -88,12 +89,6 @@ namespace Blog.Controllers
             model.Preview = _previewContent.PreviewArticleContent(articles).ToList();        
 
             return View(model);
-        }
-
-        public async Task<IActionResult> UserTestAsync()
-        {
-            var user = await _user.GetUserAsync(this.User);
-            return Json(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

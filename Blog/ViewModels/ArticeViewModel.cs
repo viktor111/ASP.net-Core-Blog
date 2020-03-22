@@ -30,6 +30,6 @@ namespace Blog.ViewModels
 
         public ICollection<Comment> Comments { get; set; }
 
-
+        public Comment CommentModel { get; set; }
     }
 }
