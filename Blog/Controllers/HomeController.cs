@@ -11,6 +11,7 @@ using Blog.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Controllers
 {
@@ -60,18 +61,20 @@ namespace Blog.Controllers
         }
 
 
+        [Authorize]
         [HttpPost]
-        public IActionResult Comment(Comment comment)
+        public IActionResult Details(ArticeViewModel comment)
         {
             var userId = _context.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var articleId = HttpContext.Request.Query["id"].ToString();
 
-            var newComment = new Comment();
-            newComment.ArticleId = 1;
-            newComment.ApplicationUserId = userId;
-            newComment.Date = DateTime.Now;
-            newComment.Content = comment.Content;
+            var commentToPost = new Comment();
+            commentToPost.ArticleId = comment.Id;
+            commentToPost.ApplicationUserId = userId;
+            commentToPost.Date = DateTime.Now;
+            commentToPost.Content = comment.CommentContent;
 
-            _comment.PostComment(newComment);
+            _comment.PostComment(commentToPost);
 
             return RedirectToAction(nameof(Index));
         }

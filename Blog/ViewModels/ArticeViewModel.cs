@@ -30,6 +30,15 @@ namespace Blog.ViewModels
 
         public ICollection<Comment> Comments { get; set; }
 
-        public Comment CommentModel { get; set; }
+        [Required]
+        [MaxLength(555)]
+        public string CommentContent { get; set; }
+
+        [Required]
+        public DateTime CommentDate { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+        public int? ArticleId { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Blog.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Blog.ViewModels;
 
 namespace Blog.Data
 {
@@ -34,5 +35,6 @@ namespace Blog.Data
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        //public DbSet<Blog.ViewModels.ArticeViewModel> ArticeViewModel { get; set; }
     }
 }
