@@ -68,7 +68,7 @@ namespace Blog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ArticeViewModel model)
+        public IActionResult Create(PostArticleViewModel model)
         {
             if (ModelState.IsValid)
             {

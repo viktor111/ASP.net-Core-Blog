@@ -33,7 +33,7 @@ namespace Blog
         {
             services.AddDbContext<BlogDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("PcConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {
