@@ -28,7 +28,7 @@ namespace Blog.ViewModels
         [Required]
         public CategoryType Category { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
         [Required]
         [MaxLength(555)]

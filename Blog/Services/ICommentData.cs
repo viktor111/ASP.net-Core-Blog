@@ -8,8 +8,8 @@ namespace Blog.Services
 {
     public interface ICommentData
     {
-        public IEnumerable<Comment> GetComments();
+        IEnumerable<Comment> GetComments(int id);
 
-        public Comment PostComment(Comment comment);
+        Comment PostComment(Comment comment);
     }
 }

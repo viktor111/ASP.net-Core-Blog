@@ -45,13 +45,14 @@ namespace Blog.Controllers
         public IActionResult Details(int id)
         {
             var article = _articleData.GetArticle(id);
+            var comments = _comment.GetComments(id).ToList();
 
             var model = new ArticeViewModel();
             model.Id = article.Id;
             model.Title = article.Title;
             model.Author = article.Author;
             model.Category = article.Category;
-            model.Comments = article.Comments;
+            model.Comments = comments;
             model.Date = article.Date;
             model.Content = article.Content;
 
@@ -76,7 +77,7 @@ namespace Blog.Controllers
 
             _comment.PostComment(commentToPost);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details));
         }
 
         [HttpGet]

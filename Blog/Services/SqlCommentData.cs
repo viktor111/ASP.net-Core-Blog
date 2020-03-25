@@ -1,5 +1,6 @@
 ﻿using Blog.Data;
 using Blog.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace Blog.Services
             _context = context;
         }
 
-        public IEnumerable<Comment> GetComments()
+        public IEnumerable<Comment> GetComments(int id)
         {
-            return _context.Comments.OrderBy(c => c.Date);
+            return _context.Comments.Where(c => c.ArticleId == id);
         }
 
         public Comment PostComment(Comment comment)
