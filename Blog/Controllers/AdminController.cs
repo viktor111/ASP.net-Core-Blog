@@ -6,18 +6,26 @@ using Blog.Models;
 using Blog.Services;
 using Blog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private IArticleData _articleData;
+        private RoleManager<IdentityRole> _roleManager;
+        private UserManager<ApplicationUser> _userManager;
 
-        public AdminController(IArticleData articleData)
+        public AdminController(IArticleData articleData,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager
+            )
         {
             _articleData = articleData;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -27,6 +35,20 @@ namespace Blog.Controllers
 
             return View(model);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Manage()
+        //{
+        //    var adminExist = await _roleManager.RoleExistsAsync("Admin")
+
+        //    var result = await _roleManager.CreateAsync(new IdentityRole
+        //    {
+        //        Name = "Admin"
+        //    });
+        //    var user = await _userManager.GetUserAsync(this.User);
+        //    await _userManager.AddToRoleAsync(user, "Admin");
+        //    return this.Json(result);
+        //}
 
         [HttpPost]
         public IActionResult Delete(int id)
@@ -81,7 +103,7 @@ namespace Blog.Controllers
 
                 newArticle = _articleData.PostArticle(newArticle);
 
-                return RedirectToAction("Details","Home", new { id = newArticle.Id });
+                return RedirectToAction("Details", "Home", new { id = newArticle.Id });
             }
             else
             {

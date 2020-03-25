@@ -28,7 +28,6 @@ namespace Blog
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BlogDbContext>(options =>
@@ -41,12 +40,12 @@ namespace Blog
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BlogDbContext>();
-                //.AddRoles<IdentityRole>()
 
             services.AddControllersWithViews();
-            services.AddRazorPages();
 
+            services.AddRazorPages();          
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IArticleData, SqlArticleData>();
             services.AddScoped<IPreview, IndexPreview>();

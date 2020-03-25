@@ -8,7 +8,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 <div class="text-center">
-    @if (SignInManager.IsSignedIn(User))
+    @if (this.User.IsInRole("Admin"))
     {
         <div>
             <a class="btn btn-success" asp-area="" asp-controller="Admin" asp-action="Create">Create</a>
@@ -51,7 +51,7 @@
                 }
                 <td><span class="text-danger">Category: </span><span style="color: @categoryColor">@article.Category</span></td>
                 <td><span class="text-danger">Author: </span>@article.Author</td>
-                @if (SignInManager.IsSignedIn(User))
+                @if (this.User.IsInRole("Admin"))
                 {
                     <td>
                         <a href="admin/eddit/@article.Id" class="btn btn-outline-warning">Eddit</a>

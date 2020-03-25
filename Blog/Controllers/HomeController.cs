@@ -22,15 +22,16 @@ namespace Blog.Controllers
         private IPreview _previewContent;
         private ICommentData _comment;
         private UserManager<ApplicationUser> _user;
-       // private RoleManager<IdentityRole> _role;
-       private IHttpContextAccessor _context;
+        private RoleManager<IdentityRole> _role;
+        private IHttpContextAccessor _context;
 
         public HomeController(IArticleData articleData,
             IPreview preview,
             ILogger<HomeController> logger,
             ICommentData comment,
             UserManager<ApplicationUser> user,
-            IHttpContextAccessor context
+            IHttpContextAccessor context,
+            RoleManager<IdentityRole> role
             )
         {
             _articleData = articleData;
@@ -39,6 +40,7 @@ namespace Blog.Controllers
             _comment = comment;
             _user = user;
             _context = context;
+            _role = role;
         }
 
         [HttpGet]
@@ -82,8 +84,7 @@ namespace Blog.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        {
-
+        {            
 
             var model = new IndexViewModel();
             model.Articles = _articleData.GetArticles();
