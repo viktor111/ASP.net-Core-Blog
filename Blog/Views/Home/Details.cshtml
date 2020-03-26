@@ -3,26 +3,51 @@
 @{
     ViewData["Title"] = "Detail";
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h1>@Model.Title</h1>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-left">
+        <span class="text-info">@Model.Author</span>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+        <span class="text-info">@Model.Category</span>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-lg-left">
+        @Model.Content
+    </div>
 
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <h1>@Model.Title</h1>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 text-left">
-            <span class="text-info">@Model.Author</span>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 text-right">
-            <span class="text-info">@Model.Category</span>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 text-lg-left">
-            @Model.Content
-        </div>
-        @foreach (var comment in Model.Comments)
-        {
-            <div class="col-lg-12 col-md-12 col-sm-12 text-lg-left">
-                @comment.Content
-            </div>
-        }
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12"><hr style="background-color: azure" /></div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h3>Comments</h3>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <table>
+            @foreach (var comment in Model.Comments)
+            {
+                <tr>
+                    <td>
+                        <p style="color: lightgray">@comment.Date.ToString("dddd, dd MMMM yyyy")</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="background-color: darkred; color:black; border-radius: 20px">@comment.Content</p>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
         <div class="col-lg-12 col-md-12 col-sm-12">
             <form asp-action="Details">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -32,12 +57,9 @@
                     <span asp-validation-for="CommentContent" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn btn-primary" />
+                    <input type="submit" value="Post Comment" class="btn btn-danger" />
                 </div>
             </form>
         </div>
-
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
-    </div>
+    }
+</div>
