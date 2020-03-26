@@ -7,17 +7,14 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <h1>@Model.Title</h1>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+        <h1 style="color: darkred !important">@Model.Title</h1>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-left">
         <span class="text-info">@Model.Author</span>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 text-right">
-        <span class="text-info">@Model.Category</span>
-    </div>
     <div class="col-lg-12 col-md-12 col-sm-12 text-lg-left">
-        @Model.Content
+        @Html.Raw(Model.Content)
     </div>
 
     <div class="col-lg-12 col-md-12 col-sm-12">

@@ -27,7 +27,11 @@
                 </td>
                 <td>
                     <h1><a style="color: darkred !important" href="home/details/@article.Id">@article.Title</a></h1>
-                    <p class="text-left">@Model.Preview[counter++] <a href="home/details/@article.Id">Read More.....</a></p>
+
+                    <div class="text-left">
+                    <p class="text-left">@Html.Raw(Model.Preview[counter++]) <a href="home/details/@article.Id">Read More.....</a></p>
+                    </div>
+                    
                 </td>
                 @switch (article.Category)
                 {
