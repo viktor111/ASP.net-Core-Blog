@@ -39,6 +39,14 @@
                     <td>
                         <p style="background-color: darkred; color:black; border-radius: 20px">@comment.Content</p>
                     </td>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <form asp-action="Delete" asp-controller="Admin" asp-route-id="@comment.Id" method="post">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            </form>
+                        </td>
+                    }
                 </tr>
             }
         </table>

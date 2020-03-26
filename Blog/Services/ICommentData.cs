@@ -9,7 +9,7 @@ namespace Blog.Services
     public interface ICommentData
     {
         IEnumerable<Comment> GetComments(int id);
-
+        Comment DeleteComment(int id);
         Comment PostComment(Comment comment);
     }
 }

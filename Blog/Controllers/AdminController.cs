@@ -6,6 +6,7 @@ using Blog.Models;
 using Blog.Services;
 using Blog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,17 +16,23 @@ namespace Blog.Controllers
     public class AdminController : Controller
     {
         private IArticleData _articleData;
+        private ICommentData _commentData;
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<ApplicationUser> _userManager;
+        private IHttpContextAccessor _httpContext;
 
         public AdminController(IArticleData articleData,
             RoleManager<IdentityRole> roleManager,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> userManager,
+            IHttpContextAccessor httpContext,
+            ICommentData commentData
             )
         {
             _articleData = articleData;
             _roleManager = roleManager;
             _userManager = userManager;
+            _httpContext = httpContext;
+            _commentData = commentData;
         }
 
         [HttpGet]
@@ -53,10 +60,18 @@ namespace Blog.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
+            var querry =_httpContext.HttpContext.Request.Headers.FirstOrDefault(r => r.Key.Contains("Referer"));
 
-            _articleData.DeleteArticle(id);
-
-            return RedirectToAction(nameof(Index), "Home");
+            if (querry.Value[0].Contains("details"))
+            {
+                _commentData.DeleteComment(id);
+                return RedirectToAction(nameof(Index), "Home");
+            }
+            else
+            {
+                _articleData.DeleteArticle(id);
+                return RedirectToAction(nameof(Index), "Home");
+            }   
         }
 
         [HttpPost]

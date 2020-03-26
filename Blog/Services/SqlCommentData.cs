@@ -17,6 +17,13 @@ namespace Blog.Services
             _context = context;
         }
 
+        public Comment DeleteComment(int id)
+        {
+            _context.Remove(_context.Comments.SingleOrDefault(a => a.Id == id));
+            _context.SaveChanges();
+            return new Comment();
+        }
+
         public IEnumerable<Comment> GetComments(int id)
         {
             return _context.Comments.Where(c => c.ArticleId == id);
