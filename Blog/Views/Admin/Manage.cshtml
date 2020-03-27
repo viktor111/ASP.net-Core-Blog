@@ -22,7 +22,7 @@
                     <span>Email: </span>
                     <p>@user.Email</p>
                     <p style="color: gold">Admin</p>
-                    <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@user.Id">Details</a>
                 </td>
             }
             else
@@ -32,8 +32,8 @@
                     <p>@user.Id</p>
                     <span>Email: </span>
                     <p>@user.Email</p>                    
-                    <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@user.Id">Details</a> 
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
                 </td>
             }
 
