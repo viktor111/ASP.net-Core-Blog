@@ -18,6 +18,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Views\Admin\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

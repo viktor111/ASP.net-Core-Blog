@@ -42,7 +42,7 @@
                     @if (this.User.IsInRole("Admin"))
                     {
                         <td>
-                            <form asp-action="Delete" asp-controller="Admin" asp-route-id="@comment.Id" method="post">
+                            <form asp-action="DeleteComment" asp-controller="Home" asp-route-id="@comment.Id" method="post">
                                 <input type="submit" value="Delete" class="btn btn-danger" />
                             </form>
                         </td>

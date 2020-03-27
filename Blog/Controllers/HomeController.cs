@@ -20,10 +20,10 @@ namespace Blog.Controllers
         private readonly ILogger<HomeController> _logger;
         private IArticleData _articleData;
         private IPreview _previewContent;
-        private ICommentData _comment;
+        private ICommentData _commentData;
         private UserManager<ApplicationUser> _user;
         private RoleManager<IdentityRole> _role;
-        private IHttpContextAccessor _context;
+        private IHttpContextAccessor _httpContext;
 
         public HomeController(IArticleData articleData,
             IPreview preview,
@@ -37,9 +37,9 @@ namespace Blog.Controllers
             _articleData = articleData;
             _previewContent = preview;
             _logger = logger;
-            _comment = comment;
+            _commentData = comment;
             _user = user;
-            _context = context;
+            _httpContext = context;
             _role = role;
         }
 
@@ -47,7 +47,7 @@ namespace Blog.Controllers
         public IActionResult Details(int id)
         {
             var article = _articleData.GetArticle(id);
-            var comments = _comment.GetComments(id).ToList();
+            var comments = _commentData.GetComments(id).ToList();
 
             var model = new ArticeViewModel();
             model.Id = article.Id;
@@ -64,11 +64,80 @@ namespace Blog.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult DeleteComment (int id)
+        {
+            _commentData.DeleteComment(id);
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteArticle(int id)
+        {
+            _articleData.DeleteArticle(id);
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult Eddit(Article model)
+        {
+            if (ModelState.IsValid)
+            {
+                var updatedAricle = new Article();
+                updatedAricle.Id = model.Id;
+                updatedAricle.Title = model.Title;
+                updatedAricle.Author = model.Author;
+                updatedAricle.Category = model.Category;
+                updatedAricle.Content = model.Content;
+                updatedAricle.Date = DateTime.Now;
+
+                updatedAricle = _articleData.EdditArticle(updatedAricle);
+
+                return RedirectToAction("Details", "Home", new { id = updatedAricle.Id });
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(PostArticleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newArticle = new Article();
+                newArticle.Title = model.Title;
+                newArticle.Author = model.Author;
+                newArticle.Category = model.Category;
+                newArticle.Content = model.Content;
+                newArticle.Date = DateTime.Now;
+
+                newArticle = _articleData.PostArticle(newArticle);
+
+                return RedirectToAction("Details", "Home", new { id = newArticle.Id });
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         [Authorize]
         [HttpPost]
         public IActionResult Details(ArticeViewModel comment)
         {
-            var userId = _context.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var articleId = HttpContext.Request.Query["id"].ToString();
 
             var commentToPost = new Comment();
@@ -77,7 +146,7 @@ namespace Blog.Controllers
             commentToPost.Date = DateTime.Now;
             commentToPost.Content = comment.CommentContent;
 
-            _comment.PostComment(commentToPost);
+            _commentData.PostComment(commentToPost);
 
             return RedirectToAction(nameof(Details));
         }
@@ -85,6 +154,7 @@ namespace Blog.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var querry = _httpContext.HttpContext.Request.Headers.FirstOrDefault(r => r.Key.Contains("Referer"));
 
             var model = new IndexViewModel();
             model.Articles = _articleData.GetArticles();

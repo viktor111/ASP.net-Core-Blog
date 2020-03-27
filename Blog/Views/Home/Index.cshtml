@@ -14,7 +14,7 @@
             <p style="color: gold">Admin</p>
         </div>
         <div>
-            <a class="btn btn-success" asp-area="" asp-controller="Admin" asp-action="Create">Create</a>
+            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Create">Create</a>
         </div>
     }
     <div>
@@ -65,7 +65,7 @@
                         <a href="admin/eddit/@article.Id" class="btn btn-outline-warning">Eddit</a>
                     </td>
                     <td>
-                        <form asp-action="Delete" asp-controller="Admin" asp-route-id="@article.Id" method="post">
+                        <form asp-action="DeleteArticle" asp-controller="Home" asp-route-id="@article.Id" method="post">
                             <input type="submit" value="Delete" class="btn btn-danger" />
                         </form>
                     </td>

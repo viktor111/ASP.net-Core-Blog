@@ -43,6 +43,12 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        public IActionResult Manage()
+        {
+            return View();
+        }
+
+
         //[HttpPost]
         //public async Task<IActionResult> Manage()
         //{
@@ -57,73 +63,7 @@ namespace Blog.Controllers
         //    return this.Json(result);
         //}
 
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            var querry =_httpContext.HttpContext.Request.Headers.FirstOrDefault(r => r.Key.Contains("Referer"));
 
-            if (querry.Value[0].Contains("details"))
-            {
-                _commentData.DeleteComment(id);
-                return RedirectToAction(nameof(Index), "Home");
-            }
-            else
-            {
-                _articleData.DeleteArticle(id);
-                return RedirectToAction(nameof(Index), "Home");
-            }   
-        }
 
-        [HttpPost]
-        public IActionResult Eddit(Article model)
-        {
-            if (ModelState.IsValid)
-            {
-                var updatedAricle = new Article();
-                updatedAricle.Id = model.Id;
-                updatedAricle.Title = model.Title;
-                updatedAricle.Author = model.Author;
-                updatedAricle.Category = model.Category;
-                updatedAricle.Content = model.Content;
-                updatedAricle.Date = DateTime.Now;
-
-                updatedAricle = _articleData.EdditArticle(updatedAricle);
-
-                return RedirectToAction("Details", "Home", new { id = updatedAricle.Id });
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(PostArticleViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var newArticle = new Article();
-                newArticle.Title = model.Title;
-                newArticle.Author = model.Author;
-                newArticle.Category = model.Category;
-                newArticle.Content = model.Content;
-                newArticle.Date = DateTime.Now;
-
-                newArticle = _articleData.PostArticle(newArticle);
-
-                return RedirectToAction("Details", "Home", new { id = newArticle.Id });
-            }
-            else
-            {
-                return View();
-            }
-        }
     }
 }
