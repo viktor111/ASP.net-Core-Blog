@@ -11,5 +11,10 @@ namespace Blog.Models
 
         public string Ttitle { get; set; }
 
+        public string GitHubLink { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public string ImgPath { get; set; }
     }
 }

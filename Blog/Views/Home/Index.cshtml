@@ -10,6 +10,9 @@
 <div class="text-center">
     @if (this.User.IsInRole("Admin"))
     {
+        <div class="float-left">
+            <p style="color: gold">Admin</p>
+        </div>
         <div>
             <a class="btn btn-success" asp-area="" asp-controller="Admin" asp-action="Create">Create</a>
         </div>
@@ -18,20 +21,21 @@
 
     </div>
     <table class="table">
+
         @foreach (var article in Model.Articles)
         {
 
             <tr>
-                <td>                    
+                <td>
                     <p style="color: lightgray">@article.Date.ToString("dddd, dd MMMM yyyy")</p>
                 </td>
                 <td>
                     <h1><a style="color: darkred !important" href="home/details/@article.Id">@article.Title</a></h1>
 
                     <div class="text-left">
-                    <p class="text-left">@Html.Raw(Model.Preview[counter++]) <a href="home/details/@article.Id">Read More.....</a></p>
+                        <p class="text-left">@Html.Raw(Model.Preview[counter++]) <a href="home/details/@article.Id">Read More.....</a></p>
                     </div>
-                    
+
                 </td>
                 @switch (article.Category)
                 {
@@ -66,8 +70,7 @@
                         </form>
                     </td>
                 }
-            </tr>            
+            </tr>
         }
     </table>
-</div>
 </div>

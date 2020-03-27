@@ -11,6 +11,8 @@ namespace Blog.Services
 
     public class SqlArticleData : IArticleData
     {
+        const int numberToDisplay = 3;
+
         private BlogDbContext _context;
 
         public SqlArticleData(BlogDbContext context)
@@ -38,7 +40,7 @@ namespace Blog.Services
         }
 
         public IEnumerable<Article> GetArticles()
-        {
+        {            
             return _context.Articles.OrderByDescending(a => a.Date);
         }
 

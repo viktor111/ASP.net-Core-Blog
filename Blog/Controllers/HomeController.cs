@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Blog.Models;
 using Blog.Services;
-using Blog.ViewModels;                      
+using Blog.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
@@ -84,14 +84,14 @@ namespace Blog.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        {            
+        {
 
             var model = new IndexViewModel();
             model.Articles = _articleData.GetArticles();
 
             IEnumerable<Article> articles = model.Articles;
 
-            model.Preview = _previewContent.PreviewArticleContent(articles).ToList();        
+            model.Preview = _previewContent.PreviewArticleContent(articles).ToList();
 
             return View(model);
         }
