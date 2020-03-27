@@ -27,6 +27,9 @@ namespace Blog.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AdminViewModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -72,6 +75,8 @@ namespace Blog.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdminViewModelId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -146,6 +151,18 @@ namespace Blog.Data.Migrations
                     b.HasIndex("ArticleId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Blog.ViewModels.AdminViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdminViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -281,6 +298,13 @@ namespace Blog.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Blog.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Blog.ViewModels.AdminViewModel", null)
+                        .WithMany("Users")
+                        .HasForeignKey("AdminViewModelId");
                 });
 
             modelBuilder.Entity("Blog.Models.Comment", b =>

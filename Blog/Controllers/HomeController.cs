@@ -78,6 +78,14 @@ namespace Blog.Controllers
             return RedirectToAction(nameof(Index), "Home");
         }
 
+        [HttpGet]
+        public IActionResult Eddit(int id)
+        {
+            var model = _articleData.GetArticle(id);
+
+            return View(model);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Eddit(Article model)
@@ -112,7 +120,7 @@ namespace Blog.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PostArticleViewModel model)
+        public IActionResult Create(Article model)
         {
             if (ModelState.IsValid)
             {

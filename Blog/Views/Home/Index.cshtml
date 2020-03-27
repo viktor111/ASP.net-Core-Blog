@@ -11,10 +11,10 @@
     @if (this.User.IsInRole("Admin"))
     {
         <div class="float-left">
-            <p style="color: gold">Admin</p>
+            <a asp-controller="Admin" asp-action="Manage"><p style="color: gold">Admin</p></a>
         </div>
         <div>
-            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Create">Create</a>
+            <a class="btn btn-success" asp-controller="Home" asp-action="Create">Create</a>
         </div>
     }
     <div>
@@ -62,7 +62,7 @@
                 @if (this.User.IsInRole("Admin"))
                 {
                     <td>
-                        <a href="admin/eddit/@article.Id" class="btn btn-outline-warning">Eddit</a>
+                        <a asp-controller="Home" asp-action="Eddit" asp-route-id="@article.Id" class="btn btn-outline-warning">Eddit</a>
                     </td>
                     <td>
                         <form asp-action="DeleteArticle" asp-controller="Home" asp-route-id="@article.Id" method="post">

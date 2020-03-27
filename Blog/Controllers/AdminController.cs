@@ -16,6 +16,7 @@ namespace Blog.Controllers
     public class AdminController : Controller
     {
         private IArticleData _articleData;
+        private IAdmin _admin;
         private ICommentData _commentData;
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<ApplicationUser> _userManager;
@@ -25,7 +26,8 @@ namespace Blog.Controllers
             RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager,
             IHttpContextAccessor httpContext,
-            ICommentData commentData
+            ICommentData commentData,
+            IAdmin admin
             )
         {
             _articleData = articleData;
@@ -33,19 +35,17 @@ namespace Blog.Controllers
             _userManager = userManager;
             _httpContext = httpContext;
             _commentData = commentData;
+            _admin = admin;
         }
 
-        [HttpGet]
-        public IActionResult Eddit(int id)
-        {
-            var model = _articleData.GetArticle(id);
-
-            return View(model);
-        }
+        
 
         public IActionResult Manage()
         {
-            return View();
+            var model = new AdminViewModel();
+            model.Users = _admin.GetUsers();
+
+            return View(model);
         }
 
 

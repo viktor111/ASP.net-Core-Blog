@@ -40,7 +40,7 @@ namespace Blog
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
             })
-                .AddRoles<IdentityRole>()
+                .AddRoles<IdentityRole>()                             
                 .AddEntityFrameworkStores<BlogDbContext>();
 
             services.AddControllersWithViews();
@@ -48,6 +48,7 @@ namespace Blog
             services.AddRazorPages();          
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IArticleData, SqlArticleData>();
+            services.AddScoped<IAdmin, SqlAdminData>();
             services.AddScoped<IPreview, IndexPreview>();
             services.AddScoped<ICommentData, SqlCommentData>();
 
