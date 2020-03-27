@@ -1,0 +1,42 @@
+﻿@model Blog.ViewModels.AdminViewModel
+
+@{
+    ViewData["Title"] = "Manage";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<h1>Users</h1>
+
+<table class="table">
+
+    @foreach (var user in Model.Users)
+    {
+
+        <tr>
+            @if (await UserManager.IsInRoleAsync(user, "Admin"))
+            {
+                <td>
+                    <span>Id: </span>
+                    <p>@user.Id</p>
+                    <span>Email: </span>
+                    <p>@user.Email</p>
+                    <p style="color: gold">Admin</p>
+                    <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
+                </td>
+            }
+            else
+            {
+                <td>
+                    <span>Id: </span>
+                    <p>@user.Id</p>
+                    <span>Email: </span>
+                    <p>@user.Email</p>                    
+                    <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                </td>
+            }
+
+        </tr>
+    }
+</table>
