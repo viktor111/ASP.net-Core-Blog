@@ -12,8 +12,27 @@
 </div>
 <h4>Comments</h4>
 <div>
-    @foreach (var comments in Model.UserComments)
-    {   
-        <div>@comments.Content</div>
-    }
+    <table>
+        @foreach (var comment in Model.UserComments)
+        {
+            <tr>
+                <td>
+                    <p style="color: lightgray">@comment.Date.ToString("dddd, dd MMMM yyyy")</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="background-color: darkred; color:black; border-radius: 20px">@comment.Content</p>
+                </td>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <td>
+                        <form asp-action="DeleteComment" asp-controller="Home" asp-route-id="@comment.Id" method="post">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
 </div>

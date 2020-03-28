@@ -29,14 +29,14 @@ namespace Blog.Services
             return _context.Users.OrderBy(u => u.Email).ToList();
         }
 
-        public ApplicationUser RestrictUser(int id)
+        public ApplicationUser RestrictUser(string id)
         {
             throw new NotImplementedException();
         }
 
-        public ApplicationUser UserDetails(int id)
+        public ApplicationUser UserDetails(string id)
         {
-            throw new NotImplementedException();
+            return _context.ApplicationUsers.Single(u => u.Id == id);
         }
     }
 }

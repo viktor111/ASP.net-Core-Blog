@@ -16,6 +16,6 @@ namespace Blog.ViewModels
 
         public List<ApplicationUser> Users{ get; set; }
 
-        public List<Comment> UserComments { get; set; }
+        public List<Comment> UserComments { get; set; }        
     }
 }

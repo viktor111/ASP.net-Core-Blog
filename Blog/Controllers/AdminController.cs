@@ -56,6 +56,9 @@ namespace Blog.Controllers
         {
             var model = new AdminViewModel();
             model.UserComments = _commentData.GetCommentsForUser(id).ToList();
+            model.UserEamil = _admin.UserDetails(id).Email;
+            model.Username = _admin.UserDetails(id).UserName;
+
             return View(model);
         }
 
