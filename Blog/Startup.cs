@@ -54,7 +54,7 @@ namespace Blog
             options.AddPolicy("NotBanned", policy =>
                 policy.
                 RequireRole("User","Admin"));                    
-            });
+            }); 
 
             
             services.AddControllersWithViews();
