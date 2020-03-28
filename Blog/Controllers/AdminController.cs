@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private IArticleData _articleData;
@@ -52,6 +52,11 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        //public IActionResult RestrictUser()
+        //{
+
+        //}
+
         public IActionResult Details(string id)
         {
             var model = new AdminViewModel();
@@ -62,21 +67,15 @@ namespace Blog.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Manage()
-        //{
-        //    var adminExist = await _roleManager.RoleExistsAsync("Admin")
+        [HttpGet]
+        public async Task<IActionResult> AddRole()
+        {
+            var result = await _roleManager.CreateAsync(new IdentityRole
+            {
+                Name = "User"
+            });
 
-        //    var result = await _roleManager.CreateAsync(new IdentityRole
-        //    {
-        //        Name = "Admin"
-        //    });
-        //    var user = await _userManager.GetUserAsync(this.User);
-        //    await _userManager.AddToRoleAsync(user, "Admin");
-        //    return this.Json(result);
-        //}
-
-
-
+            return this.Json(result);
+        }
     }
 }
