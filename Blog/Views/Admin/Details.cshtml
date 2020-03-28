@@ -1,0 +1,19 @@
+﻿@model Blog.ViewModels.AdminViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    
+    <hr />
+</div>
+<h4>Comments</h4>
+<div>
+    @foreach (var comments in Model.UserComments)
+    {   
+        <div>@comments.Content</div>
+    }
+</div>
