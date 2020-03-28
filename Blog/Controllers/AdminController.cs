@@ -52,10 +52,26 @@ namespace Blog.Controllers
             return View(model);
         }
 
-        //public IActionResult RestrictUser()
-        //{
+        [HttpPost]
+        public async Task<IActionResult> RestrictUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
 
-        //}
+            var isInUserRole = await _userManager.IsInRoleAsync(user, "User");
+
+            if (!isInUserRole)
+            {
+                ViewBag.Messege = "User already banned";
+                return RedirectToAction(nameof(Manage));
+            }
+            else
+            {
+                await _userManager.RemoveFromRoleAsync(user, "User");
+                await _userManager.AddToRoleAsync(user, "Banned");
+                ViewBag.Messege = "User banned";
+                return RedirectToAction(nameof(Manage));
+            }
+        }
 
         public IActionResult Details(string id)
         {

@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Controllers
 {
+        
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -63,7 +65,7 @@ namespace Blog.Controllers
             return View(model);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult DeleteComment (int id)
         {
@@ -71,6 +73,7 @@ namespace Blog.Controllers
             return RedirectToAction(nameof(Index), "Home");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult DeleteArticle(int id)
         {
@@ -78,6 +81,7 @@ namespace Blog.Controllers
             return RedirectToAction(nameof(Index), "Home");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Eddit(int id)
         {
@@ -140,8 +144,8 @@ namespace Blog.Controllers
                 return View();
             }
         }
-
-        [Authorize]
+  
+        [Authorize(Policy = "NotBanned")]
         [HttpPost]
         public IActionResult Details(ArticeViewModel comment)
         {
@@ -153,12 +157,18 @@ namespace Blog.Controllers
             commentToPost.ApplicationUserId = userId;
             commentToPost.Date = DateTime.Now;
             commentToPost.Content = comment.CommentContent;
-
-            _commentData.PostComment(commentToPost);
-
-            return RedirectToAction(nameof(Details));
+            if (String.IsNullOrEmpty(commentToPost.Content))
+            {
+                return RedirectToAction(nameof(Details));
+            }
+            else
+            {
+                _commentData.PostComment(commentToPost);
+                return RedirectToAction(nameof(Details));
+            }            
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {

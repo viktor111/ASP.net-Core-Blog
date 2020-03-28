@@ -49,6 +49,14 @@ namespace Blog
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
 
+            services.AddAuthorization(options =>
+            {
+            options.AddPolicy("NotBanned", policy =>
+                policy.
+                RequireRole("User","Admin"));                    
+            });
+
+            
             services.AddControllersWithViews();
 
             services.AddRazorPages();          

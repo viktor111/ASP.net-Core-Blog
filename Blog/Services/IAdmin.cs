@@ -10,7 +10,6 @@ namespace Blog.Services
     {
         List<ApplicationUser> GetUsers();
         ApplicationUser DelteUser(string id);
-        ApplicationUser RestrictUser(string id);
         ApplicationUser UserDetails(string id);
     }
 }

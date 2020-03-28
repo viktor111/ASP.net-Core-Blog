@@ -1,14 +1,20 @@
 ﻿@model Blog.ViewModels.AdminViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details";    
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <h1>Details</h1>
 
 <div>
-    
+
     <hr />
+</div>
+<div>
+ 
 </div>
 <h4>Comments</h4>
 <div>

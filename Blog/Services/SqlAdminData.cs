@@ -29,11 +29,6 @@ namespace Blog.Services
             return _context.Users.OrderBy(u => u.Email).ToList();
         }
 
-        public ApplicationUser RestrictUser(string id)
-        {
-            throw new NotImplementedException();
-        }
-
         public ApplicationUser UserDetails(string id)
         {
             return _context.ApplicationUsers.Single(u => u.Id == id);
