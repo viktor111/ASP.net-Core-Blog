@@ -27,14 +27,22 @@
             }
             else
             {
-                <td>
+
+                <td class="table-dark">
+
                     <span>Id: </span>
                     <p>@user.Id</p>
                     <span>Email: </span>
-                    <p>@user.Email</p>                    
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@user.Id">Details</a> 
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                    <p>@user.Email</p>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@user.Id">Details</a>
+                    <div class="float-right">
+                        <form asp-action="DeleteUser" asp-controller="Admin" asp-route-id="@user.Id" method="post">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </div>
+
                 </td>
+
             }
 
         </tr>

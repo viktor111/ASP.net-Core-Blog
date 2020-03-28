@@ -10,6 +10,12 @@ namespace Blog.ViewModels
     {
         public int Id { get; set; }
 
+        public string UserEamil { get; set; }
+
+        public string Username { get; set; }
+
         public List<ApplicationUser> Users{ get; set; }
+
+        public List<Comment> UserComments { get; set; }
     }
 }

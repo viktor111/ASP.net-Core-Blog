@@ -29,6 +29,11 @@ namespace Blog.Services
             return _context.Comments.Where(c => c.ArticleId == id);
         }
 
+        public IEnumerable<Comment> GetCommentsForUser(string id)
+        {
+            return _context.Comments.Where(c => c.ApplicationUser.Id == id);
+        }
+
         public Comment PostComment(Comment comment)
         {
             _context.Comments.Add(comment);

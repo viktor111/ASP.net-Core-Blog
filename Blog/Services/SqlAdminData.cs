@@ -17,9 +17,11 @@ namespace Blog.Services
             _context = context;
         }
 
-        public ApplicationUser DelteUser(int id)
+        public ApplicationUser DelteUser(string id)
         {
-            throw new NotImplementedException();
+            _context.Remove(_context.ApplicationUsers.SingleOrDefault(a => a.Id == id));
+            _context.SaveChanges();
+            return new ApplicationUser();
         }
 
         public List<ApplicationUser> GetUsers()

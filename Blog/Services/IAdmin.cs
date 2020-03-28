@@ -9,7 +9,7 @@ namespace Blog.Services
     public interface IAdmin
     {
         List<ApplicationUser> GetUsers();
-        ApplicationUser DelteUser(int id);
+        ApplicationUser DelteUser(string id);
         ApplicationUser RestrictUser(int id);
         ApplicationUser UserDetails(int id);
     }

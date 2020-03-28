@@ -38,7 +38,11 @@ namespace Blog.Controllers
             _admin = admin;
         }
 
-        
+        public IActionResult DeleteUser(string id)
+        {
+            _admin.DelteUser(id);
+            return RedirectToAction(nameof(Manage));
+        }
 
         public IActionResult Manage()
         {
@@ -48,6 +52,12 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        public IActionResult Details(string id)
+        {
+            var model = new AdminViewModel();
+            model.UserComments = _commentData.GetCommentsForUser(id).ToList();
+            return View(model);
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> Manage()
