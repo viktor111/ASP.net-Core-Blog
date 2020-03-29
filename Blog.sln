@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog", "Blog\Blog.csproj", "{B2DF12B0-2793-43C0-911A-23247239B8F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog", "Blog\Blog.csproj", "{B2DF12B0-2793-43C0-911A-23247239B8F6}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Server", "Server\Server.njsproj", "{34FB6256-D66F-42BF-9BC3-D6A27EDA2697}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B2DF12B0-2793-43C0-911A-23247239B8F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2DF12B0-2793-43C0-911A-23247239B8F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2DF12B0-2793-43C0-911A-23247239B8F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34FB6256-D66F-42BF-9BC3-D6A27EDA2697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34FB6256-D66F-42BF-9BC3-D6A27EDA2697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34FB6256-D66F-42BF-9BC3-D6A27EDA2697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34FB6256-D66F-42BF-9BC3-D6A27EDA2697}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

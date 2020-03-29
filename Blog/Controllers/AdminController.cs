@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Blog.Models;
 using Blog.Services;
@@ -15,6 +16,7 @@ namespace Blog.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        private HttpClient _client;
         private IArticleData _articleData;
         private IAdmin _admin;
         private ICommentData _commentData;
@@ -27,7 +29,8 @@ namespace Blog.Controllers
             UserManager<ApplicationUser> userManager,
             IHttpContextAccessor httpContext,
             ICommentData commentData,
-            IAdmin admin
+            IAdmin admin,
+            HttpClient client
             )
         {
             _articleData = articleData;
@@ -36,12 +39,18 @@ namespace Blog.Controllers
             _httpContext = httpContext;
             _commentData = commentData;
             _admin = admin;
+            _client = client;
         }
 
         public IActionResult DeleteUser(string id)
         {
             _admin.DelteUser(id);
             return RedirectToAction(nameof(Manage));
+        }
+
+        public IActionResult Index()
+        {
+            return View();
         }
 
         public IActionResult Manage()
@@ -92,6 +101,26 @@ namespace Blog.Controllers
             });
 
             return this.Json(result);
+        }
+
+
+        public async Task<IActionResult> Communicate()
+        {
+            var values = new Dictionary<string, string>();
+            values.Add("Target", "testphp.vulnweb.com");
+
+            var content = new FormUrlEncodedContent(values);
+            try
+            {
+                var response = await _client.PostAsync("http://localhost:3000/api/scan", content).ConfigureAwait(false);                
+                return Json("Connection edned data passed!");
+            }
+            catch
+            {
+                Console.WriteLine("Connection ended data passed!");
+                return Json("Connection edned data passed!");
+            }
+
         }
     }
 }

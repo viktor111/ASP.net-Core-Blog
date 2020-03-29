@@ -16,6 +16,7 @@ using Blog.Services;
 using Blog.ViewModels;
 using Blog.Models;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 
 namespace Blog
 {
@@ -65,6 +66,7 @@ namespace Blog
             services.AddScoped<IAdmin, SqlAdminData>();
             services.AddScoped<IPreview, IndexPreview>();
             services.AddScoped<ICommentData, SqlCommentData>();
+            services.AddScoped<HttpClient>();
 
         }
 
