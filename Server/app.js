@@ -25,19 +25,28 @@ const knownPorts = {
     8243: "HTTP Apache Synapse",
 }
 
+// Declare port scan function
 let portScan = (target) => {    
+    // Itterate trough ports
     for (var i = 0; i < ports.length; i++) {
+
+        // Initialize socket for each port
         let customSocket = new net.Socket();
 
+        // Connect to port
         customSocket.connect({
             host: target,
             port: ports[i]
         });
+
+        // On connected to port
         customSocket.on("connect", () => {
             console.log(customSocket.remotePort + " " +knownPorts[customSocket.remotePort])
             console.log(customSocket.remoteAddress)
             return;
         })
+
+        // Port closed
         customSocket.on("error", (err) => {
             let onErrSocket = new net.Socket();            
             console.log("Closed port discoverd");
@@ -47,15 +56,20 @@ let portScan = (target) => {
 
 
 
-
+// Main server
 let server = http.createServer((req, res) => {
+
+    // Gets data from Blog
     const body = [];
     let parsedBody = "";
+    // Target host
     let target = "";
-    if (req.url === "/api/scan" ) {
+    if (req.url === "/api/scan") {
+        // Read trough data and add to array
         req.on("data", (chunk) => {
             body.push(chunk);
         })
+        // Parse data and call port scan
         req.on("end", () => {
             parsedBody = Buffer.concat(body).toString();
             console.log("DATA: " + parsedBody)
@@ -66,15 +80,18 @@ let server = http.createServer((req, res) => {
     }
 });
 
+// Server init
 server.listen(3000).on("connection", (socket) => {
     let port = socket.remotePort;
 
     console.log("New socket connected to with port " + port);
 
+    // Error handle
     socket.on("error", (err) => {
         throw new err;
     })
 
+    // On data with main socket determine bytes recieved
     socket.on("data", (data) => {
         let byteArray = [];
         for (var i = 0; i < data.length; i++) {
@@ -88,6 +105,7 @@ server.listen(3000).on("connection", (socket) => {
         console.log("BYTES: " + s);
     });
 
+    // Set timeout to close connection
     socket.setTimeout(5, () => {
         console.log("Connection time out but data recieved")
         console.log("bytes recieved " + socket.bytesRead);
@@ -95,7 +113,6 @@ server.listen(3000).on("connection", (socket) => {
     })
     
 })
-
 
 
 console.log('Node server listening on port 3000');
