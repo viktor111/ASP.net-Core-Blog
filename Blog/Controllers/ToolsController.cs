@@ -34,7 +34,8 @@ namespace Blog.Controllers
         {
             ToolsViewModel model = new ToolsViewModel();
             model.Website = toolsViewModel.Website;
-            ViewData["Ip"] = _tools.IpLookUp(model.Website);
+            ViewData["Ip"] =
+                _tools.IpLookUp(model.Website);
             return View(model);
         }
     }
