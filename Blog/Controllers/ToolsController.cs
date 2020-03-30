@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Services;
 using Blog.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,14 @@ namespace Blog.Controllers
 {
     public class ToolsController : Controller
     {
+        private ITools _tools;
 
-
-        public ToolsController()
+        public ToolsController
+            (
+             ITools tools
+            )
         {
-
+            _tools = tools;
         }
 
         public IActionResult Index()
@@ -21,18 +25,16 @@ namespace Blog.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult IpLookUp()
         {
             return View();
         }
 
-        [HttpPost]
-        public IActionResult IpLookUp(ToolsViewModel toolsViewModel)
+        public IActionResult IpLookUpPOST(ToolsViewModel toolsViewModel)
         {
             ToolsViewModel model = new ToolsViewModel();
             model.Website = toolsViewModel.Website;
-
+            ViewData["Ip"] = _tools.IpLookUp(model.Website);
             return View(model);
         }
     }

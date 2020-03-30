@@ -66,7 +66,8 @@ namespace Blog
             services.AddScoped<IAdmin, SqlAdminData>();
             services.AddScoped<IPreview, IndexPreview>();
             services.AddScoped<ICommentData, SqlCommentData>();
-            services.AddScoped<HttpClient>();
+            services.AddSingleton<HttpClient>();
+            services.AddScoped<ITools, Tools>();
 
         }
 
