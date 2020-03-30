@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using Blog.Models;
 using Blog.Services;
 using Blog.ViewModels;
@@ -10,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace Blog.Controllers
 {
@@ -101,26 +105,6 @@ namespace Blog.Controllers
             });
 
             return this.Json(result);
-        }
-
-
-        public async Task<IActionResult> Communicate()
-        {
-            var values = new Dictionary<string, string>();
-            values.Add("Target", "testphp.vulnweb.com");
-
-            var content = new FormUrlEncodedContent(values);
-            try
-            {
-                var response = await _client.PostAsync("http://localhost:3000/api/scan", content).ConfigureAwait(false);                
-                return Json("Connection edned data passed!");
-            }
-            catch
-            {
-                Console.WriteLine("Connection ended data passed!");
-                return Json("Connection edned data passed!");
-            }
-
         }
     }
 }

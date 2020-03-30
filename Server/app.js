@@ -1,7 +1,7 @@
 const http = require("http");
 const net = require("net");
 
-const ports = [80,21,22,23,80,209,311,443,514,1337,1801,2375,2376,3074,3306,5050,6516,8080,8243,]
+const ports = [80, 21, 22, 23, 80, 209, 311, 443, 514, 1337, 1801, 2375, 2376, 3074, 3306, 5050, 6516, 8080, 8243, 563, 711]
 
 const knownPorts = {
     20: "FTP Data Transferer",
@@ -23,6 +23,8 @@ const knownPorts = {
     6516: "Windows Admin Center",
     8080: "HTTP",
     8243: "HTTP Apache Synapse",
+    563: "NNTP",
+    711: "Cisco"
 }
 
 // Declare port scan function
@@ -37,19 +39,18 @@ let portScan = (target) => {
         customSocket.connect({
             host: target,
             port: ports[i]
-        });
+        });        
 
         // On connected to port
         customSocket.on("connect", () => {
-            console.log(customSocket.remotePort + " " +knownPorts[customSocket.remotePort])
-            console.log(customSocket.remoteAddress)
+            console.log("Open port: " + customSocket.remotePort + " " +knownPorts[customSocket.remotePort])
+            console.log("Socket connected at: " + customSocket.remoteAddress)
             return;
         })
 
         // Port closed
-        customSocket.on("error", (err) => {
-            let onErrSocket = new net.Socket();            
-            console.log("Closed port discoverd");
+        customSocket.on("error", (err) => {                 
+            //console.log("Closed port discoverd");
         })
     }
 }
@@ -75,8 +76,8 @@ let server = http.createServer((req, res) => {
             console.log("DATA: " + parsedBody)
             target = parsedBody.split("=")[1]; 
 
-            portScan(target);
-        })          
+            portScan(target);            
+        })        
     }
 });
 
@@ -106,11 +107,11 @@ server.listen(3000).on("connection", (socket) => {
     });
 
     // Set timeout to close connection
-    socket.setTimeout(5, () => {
-        console.log("Connection time out but data recieved")
-        console.log("bytes recieved " + socket.bytesRead);
-        socket.end();
-    })
+    //socket.setTimeout(5, () => {
+    //    console.log("Connection time out but data recieved")
+    //    console.log("bytes recieved " + socket.bytesRead);
+    //    socket.end();
+    //})
     
 })
 
