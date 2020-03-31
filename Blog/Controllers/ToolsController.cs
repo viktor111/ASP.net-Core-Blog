@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Blog.Services;
 using Blog.ViewModels;
@@ -34,9 +35,14 @@ namespace Blog.Controllers
         {
             ToolsViewModel model = new ToolsViewModel();
             model.Website = toolsViewModel.Website;
-            ViewData["Ip"] =
-                _tools.IpLookUp(model.Website);
+            ViewData["Ip"] = _tools.IpLookUp(model.Website);
             return View(model);
+        }
+
+        public IActionResult WhatsMyIp()
+        {
+            ViewData["MyIp"] = _tools.WhatsMyIp();
+            return View();
         }
     }
 }
