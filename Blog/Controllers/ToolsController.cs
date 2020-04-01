@@ -44,5 +44,19 @@ namespace Blog.Controllers
             ViewData["MyIp"] = _tools.WhatsMyIp();
             return View();
         }
+
+        public IActionResult PortScan()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult PortScanPOST(ToolsViewModel toolsViewModel)
+        {
+            ToolsViewModel model = new ToolsViewModel();
+            model.Website = toolsViewModel.Website;
+            //ViewData["openPorts"] = _tools.PortScan(model.Website);
+            return View();
+        }
     }
 }
