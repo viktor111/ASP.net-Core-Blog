@@ -1,0 +1,11 @@
+﻿@model Blog.ViewModels.ToolsViewModel
+@{
+    ViewData["Title"] = "PortScan";
+}
+
+<h1>View</h1>
+
+<partial name="PortScanPOST" />
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

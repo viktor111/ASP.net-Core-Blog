@@ -1,0 +1,37 @@
+﻿@model Blog.ViewModels.ToolsViewModel
+
+@{
+
+    var open = ViewData["openPorts"];
+}
+
+<div>
+    @*@foreach (KeyValuePair<int, string> kvp in openPorts)
+    {
+        <p>@kvp.Key || @kvp.Value</p>
+    }*@
+
+    @open
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PortScanPOST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Website" class="control-label"></label>
+                <input asp-for="Website" class="form-control" />
+                <span asp-validation-for="Website" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
