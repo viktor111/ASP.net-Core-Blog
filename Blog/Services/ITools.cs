@@ -10,6 +10,6 @@ namespace Blog.Services
     {
         string IpLookUp(string host);
         string WhatsMyIp();
-        //string PortScan(string website);
+        Task<List<string>> PortScanAsync(string website);
     }
 }

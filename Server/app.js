@@ -4,7 +4,7 @@ const sql = require("mssql");
 const fs = require('fs');
 
 
-const ports = [80, 21, 22, 23, 80, 209, 311, 443, 514, 1337, 1801, 2375, 2376, 3074, 3306, 5050, 6516, 8080, 8243, 563, 711]
+const ports = [21, 22, 23, 80, 209, 311, 443, 514, 1337, 1801, 2375, 2376, 3074, 3306, 5050, 6516, 8080, 8243, 563, 711, 80]
 
 const knownPorts = {
     20: "FTP Data Transferer",
@@ -31,6 +31,7 @@ const knownPorts = {
 }
 
 const result = {};
+let resStr = "";
 
 // Declare port scan function
 let portScan = (target) => {
@@ -52,6 +53,8 @@ let portScan = (target) => {
             console.log("Open port: " + customSocket.remotePort + " " + knownPorts[customSocket.remotePort])
             console.log("Socket connected at: " + customSocket.remoteAddress)
             console.log(result);
+            resStr += customSocket.remotePort + "|" + knownPorts[customSocket.remotePort];
+            resStr += ";";
             return result[customSocket.remotePort] = knownPorts[customSocket.remotePort];
         })
 
@@ -88,7 +91,9 @@ let server = http.createServer((req, res) => {
         })
 
         setTimeout(() => {
-            res.write(JSON.stringify(result));
+            console.log(resStr);
+            res.write(resStr);
+            resStr = "";
             res.end();
         }, 600)
       

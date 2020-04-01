@@ -109,32 +109,6 @@ namespace Blog.Controllers
             return this.Json(result);
         }
 
-        public async Task<IActionResult> Communicate()
-        {
-            var values = new Dictionary<string, string>
-            {
-              { "target", "google.com" },              
-            };
-
-            var content = new FormUrlEncodedContent(values);
-            try
-            {
-                var response = await _client.PostAsync("http://localhost:3000/api/scan", content);
-
-                // "{\"80\":\"HTTP\",\"443\":\"HTTPS\"}"
-                var responseString = await response.Content.ReadAsStringAsync();
-
-                var reg = new Regex(@"^\w+$");
-
-                MatchCollection res = reg.Matches(responseString);
-                return Json(responseString);
-            }
-            catch (Exception)
-            {
-
-                return Json("Data passed");
-            }
-        }
 
     }
 }

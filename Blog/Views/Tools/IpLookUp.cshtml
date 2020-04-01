@@ -1,4 +1,4 @@
-﻿@model Blog.ViewModels.ToolsViewModel
+﻿
 @{
     ViewData["Title"] = "IpLookUp";
     var ip = ViewData["Ip"];
@@ -7,6 +7,8 @@
 <h1>IpLookUp</h1>
 
 <partial name="IpLookUpPOST" />
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

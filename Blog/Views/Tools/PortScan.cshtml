@@ -1,11 +1,47 @@
 ﻿@model Blog.ViewModels.ToolsViewModel
 @{
     ViewData["Title"] = "PortScan";
+    var openPorts = (string[])ViewData["prts"];
 }
 
-<h1>View</h1>
+<h1>PortScan</h1>
 
-<partial name="PortScanPOST" />
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@if (ViewData["prts"] == null)
+{
+
 }
+else
+{
+    for (int i = 0; i < openPorts.Length; i++)
+    {
+        var last = openPorts[openPorts.Length - 1];
+
+        var current = openPorts[i];
+
+
+        if (last == current)
+        {
+
+        }
+        else
+        {
+            <p>@current</p>
+        }
+    }
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PortScan">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Website" class="control-label"></label>
+                <input asp-for="Website" class="form-control" />
+                <span asp-validation-for="Website" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Scan Target" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
