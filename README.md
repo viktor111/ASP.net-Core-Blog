@@ -8,6 +8,7 @@ cd ../ASP.net-Core-Blog
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 open solution
+start app.js and blog asp
 ```
 ### Prerequisites
 (To run localy)
@@ -17,6 +18,7 @@ open solution
 -dotnet ef cli -run this command to install-(dotnet tool install --global dotnet-ef)
 -Entity Framework Core
 -Asp.net Core 3.1
+-Node.JS
 ```
 
 ## Built With
