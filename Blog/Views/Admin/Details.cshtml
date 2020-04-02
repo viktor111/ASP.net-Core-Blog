@@ -37,6 +37,9 @@
                             <input type="submit" value="Delete" class="btn btn-danger" />
                         </form>
                     </td>
+                    <td>
+                        <a class="btn btn-info" asp-action="Details" asp-controller="Home" asp-route-id="@comment.ArticleId">Commented Article</a>
+                    </td>
                 }
             </tr>
         }
