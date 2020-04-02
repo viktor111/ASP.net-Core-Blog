@@ -17,6 +17,12 @@
             <a class="btn btn-success" asp-controller="Home" asp-action="Create">Create</a>
         </div>
     }
+    @if (this.User.IsInRole("Banned"))
+    {
+        <div class="float-left">
+            <p style="color: red">You have been banned by admin. You can still read but cant comments or use tools.</p>
+        </div>
+    }
     <div>
 
     </div>

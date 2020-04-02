@@ -6,10 +6,12 @@ using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Blog.Services;
 using Blog.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
+    [Authorize(Policy = "NotBanned")]
     public class ToolsController : Controller
     {
         private ITools _tools;
@@ -80,7 +82,7 @@ namespace Blog.Controllers
             catch (Exception)
             {
 
-                return RedirectToAction();
+                return RedirectToAction(nameof(PortScan));
                 
             }
         }

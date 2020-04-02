@@ -48,9 +48,19 @@
                             <input type="submit" value="Delete" class="btn btn-danger" />
                         </form>
                     </div>
-                    <form asp-action="RestrictUser" asp-controller="Admin" asp-route-id="@user.Id" method="post">
-                        <input type="submit" value="Ban" class="btn btn-warning" />
-                    </form>
+                    @if (await UserManager.IsInRoleAsync(user, "Banned"))
+                    {
+                        <form asp-action="UnRestrictUser" asp-controller="Admin" asp-route-id="@user.Id" method="post">
+                            <input type="submit" value="Unban" class="btn btn-success" />
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="RestrictUser" asp-controller="Admin" asp-route-id="@user.Id" method="post">
+                            <input type="submit" value="Ban" class="btn btn-warning" />
+                        </form>
+                    }
+
                 </td>
 
             }

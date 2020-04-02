@@ -67,6 +67,25 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> UnRestrictUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            var isInUserRole = await _userManager.IsInRoleAsync(user, "Banned");
+
+            if (!isInUserRole)
+            {      
+                return RedirectToAction(nameof(Manage));
+            }
+            else
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Banned");
+                await _userManager.AddToRoleAsync(user, "User");
+                ViewBag.Messege = "User banned";
+                return RedirectToAction(nameof(Manage));
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> RestrictUser(string id)
         {
