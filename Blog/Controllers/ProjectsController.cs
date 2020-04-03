@@ -44,8 +44,9 @@ namespace Blog.Controllers
             if (ModelState.IsValid)
             {
                 var model = new Project();
+                model.Ttitle = project.Ttitle;
                 model.Description = project.Description;
-                model.Date = project.Date;
+                model.Date = DateTime.Now;
                 model.GitHubLink = project.GitHubLink;
                 model.Technology = project.Technology;
 

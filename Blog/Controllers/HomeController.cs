@@ -135,7 +135,7 @@ namespace Blog.Controllers
                 newArticle.Content = model.Content;
                 newArticle.Date = DateTime.Now;
 
-                newArticle = _articleData.PostArticle(newArticle);
+                _articleData.PostArticle(newArticle);
 
                 return RedirectToAction("Details", "Home", new { id = newArticle.Id });
             }
