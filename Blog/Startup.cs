@@ -68,6 +68,7 @@ namespace Blog
             services.AddScoped<ICommentData, SqlCommentData>();
             services.AddSingleton<HttpClient>();
             services.AddScoped<ITools, Tools>();
+            services.AddScoped<IProjectData, SqlProjectData>();
 
         }
 

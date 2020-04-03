@@ -2,25 +2,60 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Models;
+using Blog.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
     public class ProjectsController : Controller
     {
+        private IProjectData _project;
+        private UserManager<ApplicationUser> _user;
+        private RoleManager<IdentityRole> _role;
+
+        public ProjectsController(IArticleData articleData,
+
+            UserManager<ApplicationUser> user,
+            RoleManager<IdentityRole> role,
+            IProjectData project
+            )
+        {
+            _user = user;
+            _role = role;
+            _project = project;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Cv()
+        [HttpPost]
+        public IActionResult Create(Project project)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var model = new Project();
+                model.Description = project.Description;
+                model.Date = project.Date;
+                model.GitHubLink = project.GitHubLink;
+                model.Technology = project.Technology;
+
+                model = _project.PostArticle(model);
+                return RedirectToAction("Details", "Project", new { id = model.Id });
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Edit()
@@ -29,6 +64,11 @@ namespace Blog.Controllers
         }
 
         public IActionResult Details(int id)
+        {
+            return View();
+        }
+
+        public IActionResult List()
         {
             return View();
         }
