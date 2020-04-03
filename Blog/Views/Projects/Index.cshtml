@@ -1,0 +1,22 @@
+﻿@model Blog.ViewModels.ProjectsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<h1>Index</h1>
+
+@if (this.User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Create" asp-controller="Projects">Create</a>
+    </div>
+}
+<div>
+    <a>Projects</a>
+</div>
+<div>
+    <a>Cv</a>
+</div>

@@ -83,10 +83,8 @@ namespace Blog.Controllers
             {
 
                 return RedirectToAction(nameof(PortScan));
-                
+
             }
         }
-
-
     }
 }

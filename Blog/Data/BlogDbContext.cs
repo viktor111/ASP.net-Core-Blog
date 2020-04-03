@@ -34,6 +34,8 @@ namespace Blog.Data
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }        
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Blog.ViewModels.ProjectsViewModel> ProjectsViewModel { get; set; }
     }
 }

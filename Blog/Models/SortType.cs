@@ -5,14 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Models
 {
-    public enum SortType
+    public class SortType
     {
-        date,
-        title,
-        general,
-        web,
-        AI,
-        hacking,
-        tips,
     }
 }
