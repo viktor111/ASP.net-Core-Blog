@@ -25,5 +25,7 @@ namespace Blog.ViewModels
 
         [Required]
         public TechnologyType Technology { get; set; }
+
+        public IEnumerable<Project> Projects { get; set; }
     }
 }

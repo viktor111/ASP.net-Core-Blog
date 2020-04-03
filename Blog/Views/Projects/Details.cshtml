@@ -9,10 +9,6 @@
 <div>
 <h1>@Model.Ttitle</h1>
 <div>@Model.Technology</div>
-<div>@Model.Description</div>
+<div>@Html.Raw(Model.Description)</div>
 <div>@Model.GitHubLink</div>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

@@ -1,5 +1,6 @@
 ﻿using Blog.Data;
 using Blog.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,27 +17,31 @@ namespace Blog.Services
             _context = context;
         }
 
-        public Project DeleteArticle(int id)
+        public Project DeleteProject(int id)
         {
-            throw new NotImplementedException();
+            _context.Remove(_context.Projects.SingleOrDefault(p => p.Id == id));
+            _context.SaveChanges();
+            return new Project();
         }
 
-        public Project EdditArticle(Project article)
+        public Project EdditProject(Project Project)
         {
-            throw new NotImplementedException();
+            _context.Attach(Project).State = EntityState.Modified;
+            _context.SaveChanges();
+            return Project;
         }
 
-        public Project GetArticle(int id)
+        public Project GetProject(int id)
         {
-            throw new NotImplementedException();
+            return _context.Projects.FirstOrDefault(p => p.Id == id);
         }
 
-        public IEnumerable<Project> GetArticles()
+        public IEnumerable<Project> GetProjects()
         {
-            throw new NotImplementedException();
+            return _context.Projects.OrderByDescending(p => p.Technology);
         }
 
-        public Project PostArticle(Project project)
+        public Project PostProject(Project project)
         {
             _context.Projects.Add(project);
             _context.SaveChanges();

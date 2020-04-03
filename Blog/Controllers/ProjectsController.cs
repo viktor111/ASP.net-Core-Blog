@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Blog.Models;
 using Blog.Services;
+using Blog.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,14 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _project.DeleteProject(id);
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Project project)
         {
             if (ModelState.IsValid)
@@ -50,8 +59,8 @@ namespace Blog.Controllers
                 model.GitHubLink = project.GitHubLink;
                 model.Technology = project.Technology;
 
-                model = _project.PostArticle(model);
-                return RedirectToAction("Details", "Project", new { id = model.Id });
+                model = _project.PostProject(model);
+                return RedirectToAction("Details", new { id = model.Id });
             }
             else
             {
@@ -59,19 +68,56 @@ namespace Blog.Controllers
             }
         }
 
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            return View();
+            var model = _project.GetProject(id);
+            return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Edit(Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = new Project();
+                model.Id = project.Id;
+                model.Ttitle = project.Ttitle;
+                model.Description = project.Description;
+                model.Date = DateTime.Now;
+                model.GitHubLink = project.GitHubLink;
+                model.Technology = project.Technology;
+
+                model = _project.EdditProject(model);
+                return RedirectToAction(nameof(List));
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
         public IActionResult Details(int id)
         {
-            return View();
+            var project = _project.GetProject(id);
+
+            var model = new ProjectsViewModel();
+            model.Ttitle = project.Ttitle;
+            model.Description = project.Description;
+            model.GitHubLink = project.GitHubLink;
+            model.Technology = project.Technology;
+
+            ViewData["Id"] = model.Id.ToString();
+            return View(model);
         }
 
         public IActionResult List()
         {
-            return View();
+            var model = new ProjectsViewModel();
+            model.Projects = _project.GetProjects();
+
+            return View(model);
         }
     }
 }

@@ -8,10 +8,10 @@ namespace Blog.Services
 {
     public interface IProjectData
     {
-        IEnumerable<Project> GetArticles();
-        Project GetArticle(int id);
-        Project PostArticle(Project article);
-        Project EdditArticle(Project article);
-        Project DeleteArticle(int id);
+        IEnumerable<Project> GetProjects();
+        Project GetProject(int id);
+        Project PostProject(Project article);
+        Project EdditProject(Project article);
+        Project DeleteProject(int id);
     }
 }

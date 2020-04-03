@@ -18,5 +18,6 @@ namespace Blog.Models
         public DateTime Date { get; set; }
 
         public TechnologyType Technology { get; set; }
+
     }
 }
