@@ -2,7 +2,6 @@
 @{
     var ip = ViewData["Ip"];
 }
-<h4>ToolsViewModel</h4>
 <hr />
 <div>@ip</div>
 <div class="row">
@@ -15,7 +14,7 @@
                 <span asp-validation-for="Website" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Scan Target" class="btn btn-primary" />
+                <input type="submit" value="Scan Target" class="btn btn-danger" />
             </div>
         </form>
     </div>

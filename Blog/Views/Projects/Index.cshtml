@@ -6,14 +6,20 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<h1>Index</h1>
-
 @if (this.User.IsInRole("Admin"))
 {
     <div>
-        <a asp-action="Create" asp-controller="Projects">Create</a>
+        <a asp-action="Create" asp-controller="Projects">Create Project</a>
     </div>
 }
-<div>
-    <a asp-action="List" asp-controller="Projects">Projects</a>
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <a asp-action="List" asp-controller="Projects">Projects</a>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <a asp-action="List" asp-controller="Projects">Projects</a>
+    </div>
 </div>
+
+

@@ -4,11 +4,16 @@
     var openPorts = (string[])ViewData["prts"];
 }
 
-<h1>PortScan</h1>
+
+
+<div>
+    <h3 class="tool-h1">PortScan</h3>
+</div>
+
 
 @if (ViewData["prts"] == null)
 {
-   
+
 }
 else
 {
@@ -25,7 +30,7 @@ else
         }
         else
         {
-            <p>@current</p>
+            <p class="text-danger">@current</p>
         }
     }
 }
@@ -39,8 +44,8 @@ else
                 <input asp-for="Website" class="form-control" />
                 <span asp-validation-for="Website" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Scan Target" class="btn btn-primary" />
+            <div class="wrap">
+                <input type="submit" value="Scan Target" class="btn btn-danger" />
             </div>
         </form>
     </div>
