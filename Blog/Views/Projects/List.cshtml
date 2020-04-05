@@ -4,6 +4,14 @@
     ViewData["Title"] = "Projects";
 }
 
+
+@if (this.User.IsInRole("Admin"))
+{
+    <div>
+        <a style="color: gold" asp-action="Create" asp-controller="Projects">Create Project</a>
+    </div>
+}
+
 @foreach (var project in Model.Projects)
 {
     <div>
