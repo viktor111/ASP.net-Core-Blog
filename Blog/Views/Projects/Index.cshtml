@@ -12,14 +12,96 @@
         <a asp-action="Create" asp-controller="Projects">Create Project</a>
     </div>
 }
-
 <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
-        <a asp-action="List" asp-controller="Projects">Projects</a>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h3>Abaout me</h3>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-12">
-        <a asp-action="List" asp-controller="Projects">Projects</a>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <p>
+            My name is Viktor im a c# and node js backend developer. I have experience with sql and non-sql databases.
+            I also have experience with python and linux systems. I like exploring and learning new technologies.
+        </p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h3>Skills</h3>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            C#
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Intialy when i started learning i started with c#. This application is made on ASP and C#. I have experience with backend for web applications and using sql databases with and without entity framework.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            NodeJS
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        I have epxerience with express for backend apps using non sql databases like mongodb. Also have experince with pure node server side this port scanner was build using pure node.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Python
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        I studied python because i like it and its fun. I have small experince with working with flask for web applications. Mostly have experince making network testing scripts with python.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                            FrontEnd
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        I have experince working with CSS and html but not at very advnaced level. Bootstrap i know quite well.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                            Databases
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
+                        I have experience with sql databases like mssql also non sql like mongodb and have also worked with simple dbs like kinvey and firebase.
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+</div>
 
+<a asp-action="List" asp-controller="Projects">Projects</a>
 
