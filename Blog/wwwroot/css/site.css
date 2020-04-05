@@ -63,7 +63,8 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-image: url(../images/website-design-slider-background-stockton.jpg);
+    background-image: url(../images/website-design-slider-background-stockton.jpg); 
+    background-size: auto;
 }
 
 .footer {
