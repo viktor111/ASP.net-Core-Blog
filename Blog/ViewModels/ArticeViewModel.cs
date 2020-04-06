@@ -21,7 +21,7 @@ namespace Blog.ViewModels
         [Required]
         public string Content { get; set; }
 
-        [Required]
+        [Required]        
         [MaxLength(60)]
         public string Author { get; set; }
 
@@ -36,6 +36,10 @@ namespace Blog.ViewModels
 
         [Required]
         public DateTime CommentDate { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
 
         public string ApplicationUserId { get; set; }
 

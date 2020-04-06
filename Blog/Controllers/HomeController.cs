@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using Blog.Data;
+using ReflectionIT.Mvc.Paging;
 
 namespace Blog.Controllers
 {
@@ -26,6 +28,7 @@ namespace Blog.Controllers
         private UserManager<ApplicationUser> _user;
         private RoleManager<IdentityRole> _role;
         private IHttpContextAccessor _httpContext;
+        private BlogDbContext _DbContext;
 
         public HomeController(IArticleData articleData,
             IPreview preview,
@@ -33,7 +36,8 @@ namespace Blog.Controllers
             ICommentData comment,
             UserManager<ApplicationUser> user,
             IHttpContextAccessor context,
-            RoleManager<IdentityRole> role
+            RoleManager<IdentityRole> role,
+            BlogDbContext DbContext
             )
         {
             _articleData = articleData;
@@ -43,24 +47,33 @@ namespace Blog.Controllers
             _user = user;
             _httpContext = context;
             _role = role;
+            _DbContext = DbContext;
         }
-
+            
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, int page =1 )
         {
             var article = _articleData.GetArticle(id);
-            var comments = _commentData.GetComments(id).ToList();
+           //var comments = _commentData.GetComments(id).ToList();
+
+           //var pagedList =  PagingList.Create(comments, 2, page);
 
             var model = new ArticeViewModel();
-            model.Id = article.Id;
+            model.Id = id;
             model.Title = article.Title;
             model.Author = article.Author;
             model.Category = article.Category;
-            model.Comments = comments;
+            model.Comments = _commentData.GetComments(id,2, (page - 1) * 2).ToList();
             model.Date = article.Date;
             model.Content = article.Content;
-
             ViewData["Id"] = model.Id.ToString();
+
+            if (model.PagesCount == 0)
+            {
+                model.PagesCount = 1;
+            }
+
+            model.CurrentPage = page;
 
             return View(model);
         }
@@ -170,12 +183,12 @@ namespace Blog.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
             var querry = _httpContext.HttpContext.Request.Headers.FirstOrDefault(r => r.Key.Contains("Referer"));
 
             var model = new IndexViewModel();
-            model.Articles = _articleData.GetArticles();
+            model.Articles = PagingList.Create(_articleData.GetArticles(), 2, page);
 
             IEnumerable<Article> articles = model.Articles;
 

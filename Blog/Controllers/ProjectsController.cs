@@ -30,7 +30,10 @@ namespace Blog.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new ProjectsViewModel();
+            model.Projects = _project.GetProjects();
+
+            return View(model);
         }
 
         [HttpGet]

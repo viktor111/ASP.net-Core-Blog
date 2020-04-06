@@ -3,14 +3,23 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Tools</h1>
 
-<div>
-    <a asp-action="IpLookUp">Ip Look Up</a>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 ">
+        <a class="btn btn-danger" asp-action="IpLookUp">Ip Look Up</a>
+        <hr style="background-color: aliceblue" />
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <a class="btn btn-danger" asp-action="WhatsMyIp">Whats My Ip</a>
+        <hr style="background-color: aliceblue" />
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <a class="btn btn-danger" asp-action="PortScan">Port Scan</a>
+    </div>
 </div>
-<div>
-    <a asp-action="WhatsMyIp">Whats My Ip</a>
-</div>
-<div>
-    <a asp-action="PortScan">Port Scan</a>
-</div>
+<hr style="background-color: aliceblue" />
+<p>Make sure to check out <a href="https://github.com/viktor111/BH_konsol">this</a> link for full extension of tools for hacking made in console or <a href="https://github.com/viktor111/zvadohacks">this</a> for all separate tools.</p>
+

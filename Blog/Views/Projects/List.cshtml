@@ -16,8 +16,18 @@
 {
 
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <a asp-action="Details" asp-route-id="@project.Id">@project.Ttitle</a>
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <h3>
+                <a  style="color: darkred" asp-action="Details" asp-route-id="@project.Id">
+                    @project.Ttitle
+                </a>
+            </h3>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <p>@project.Ttitle</p>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 float-left">
+            <p><span style="color: lightgray">Technology: </span>@project.Technology</p>
         </div>
 
         @if (this.User.IsInRole("Admin"))
@@ -32,4 +42,5 @@
             </div>
         }
     </div>
+    <hr style="background-color: aliceblue"/>
 }

@@ -26,6 +26,10 @@
     <div>
 
     </div>
+
+    <div>
+        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.Articles })
+    </div>
     <table class="table">
 
         @foreach (var article in Model.Articles)
@@ -79,4 +83,7 @@
             </tr>
         }
     </table>
+</div>
+<div>
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.Articles })
 </div>

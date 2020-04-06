@@ -3,12 +3,18 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="row">
 
-<h1>Details</h1>
-
-<div>
-<h1>@Model.Ttitle</h1>
-<div>@Model.Technology</div>
-<div>@Html.Raw(Model.Description)</div>
-<div>@Model.GitHubLink</div>
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+        <h1 style="color: darkred">@Model.Ttitle</h1>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <span style="color: lightgrey">Techonolgy: </span>@Model.Technology
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        @Html.Raw(Model.Description)
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        @Model.GitHubLink
+    </div>
 </div>

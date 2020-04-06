@@ -17,6 +17,7 @@ using Blog.ViewModels;
 using Blog.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
+using ReflectionIT.Mvc.Paging;
 
 namespace Blog
 {
@@ -37,7 +38,6 @@ namespace Blog
 
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = true;
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
             })
@@ -55,9 +55,12 @@ namespace Blog
             options.AddPolicy("NotBanned", policy =>
                 policy.
                 RequireRole("User","Admin"));                    
-            }); 
+            });
 
-            
+            services.AddPaging(options => {
+                options.ViewName = "Bootstrap4";
+            });
+
             services.AddControllersWithViews();
 
             services.AddRazorPages();          
@@ -94,6 +97,10 @@ namespace Blog
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                           "forumCategory",
+                           "f/{name:minlength(3)}",
+                           new { controller = "Home", action = "Details" });
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
