@@ -24,15 +24,9 @@ namespace Blog.Services
             return new Comment();
         }
 
-        public IEnumerable<Comment> GetComments(int id, int? take = null, int skip = 0)
+        public IEnumerable<Comment> GetComments(int id)
         {
-            var querry = _context.Comments.Where(c => c.ArticleId == id).Skip(skip);
-
-            if (take.HasValue)
-            {
-                querry = querry.Take(take.Value);
-            }
-
+            var querry = _context.Comments.Where(c => c.ArticleId == id);
 
             return querry;
         }

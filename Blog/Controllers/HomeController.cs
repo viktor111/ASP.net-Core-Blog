@@ -51,7 +51,7 @@ namespace Blog.Controllers
         }
             
         [HttpGet]
-        public IActionResult Details(int id, int page =1 )
+        public IActionResult Details(int id)
         {
             var article = _articleData.GetArticle(id);
            //var comments = _commentData.GetComments(id).ToList();
@@ -63,17 +63,12 @@ namespace Blog.Controllers
             model.Title = article.Title;
             model.Author = article.Author;
             model.Category = article.Category;
-            model.Comments = _commentData.GetComments(id,2, (page - 1) * 2).ToList();
+            model.Comments = _commentData.GetComments(id).ToList();
             model.Date = article.Date;
             model.Content = article.Content;
             ViewData["Id"] = model.Id.ToString();
 
-            if (model.PagesCount == 0)
-            {
-                model.PagesCount = 1;
-            }
-
-            model.CurrentPage = page;
+          
 
             return View(model);
         }
@@ -188,7 +183,7 @@ namespace Blog.Controllers
             var querry = _httpContext.HttpContext.Request.Headers.FirstOrDefault(r => r.Key.Contains("Referer"));
 
             var model = new IndexViewModel();
-            model.Articles = PagingList.Create(_articleData.GetArticles(), 2, page);
+            model.Articles = PagingList.Create(_articleData.GetArticles(), 10, page);
 
             IEnumerable<Article> articles = model.Articles;
 

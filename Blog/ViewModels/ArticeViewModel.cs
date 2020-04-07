@@ -37,10 +37,6 @@ namespace Blog.ViewModels
         [Required]
         public DateTime CommentDate { get; set; }
 
-        public int CurrentPage { get; set; }
-
-        public int PagesCount { get; set; }
-
         public string ApplicationUserId { get; set; }
 
         public int? ArticleId { get; set; }

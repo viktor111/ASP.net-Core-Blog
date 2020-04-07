@@ -8,7 +8,7 @@ namespace Blog.Services
 {
     public interface ICommentData
     {
-        IEnumerable<Comment> GetComments(int id, int? take, int skip);
+        IEnumerable<Comment> GetComments(int id);
         IEnumerable<Comment> GetCommentsForUser(string id);
         Comment DeleteComment(int id);
         Comment PostComment(Comment comment);
