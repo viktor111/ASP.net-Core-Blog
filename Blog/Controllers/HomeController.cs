@@ -183,7 +183,7 @@ namespace Blog.Controllers
             var querry = _httpContext.HttpContext.Request.Headers.FirstOrDefault(r => r.Key.Contains("Referer"));
 
             var model = new IndexViewModel();
-            model.Articles = PagingList.Create(_articleData.GetArticles(), 10, page);
+            model.Articles = PagingList.Create(_articleData.GetArticles(), 5, page);
 
             IEnumerable<Article> articles = model.Articles;
 
