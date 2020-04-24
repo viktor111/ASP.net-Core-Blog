@@ -30,7 +30,8 @@ namespace Blog.Controllers
         private UserManager<ApplicationUser> _userManager;
         private IHttpContextAccessor _httpContext;
 
-        public AdminController(IArticleData articleData,
+        public AdminController(
+            IArticleData articleData,
             RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager,
             IHttpContextAccessor httpContext,

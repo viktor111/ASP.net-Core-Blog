@@ -63,6 +63,11 @@ namespace Blog
 
             services.AddControllersWithViews();
 
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AutomaticAuthentication = false;
+            });
+
             services.AddRazorPages();          
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IArticleData, SqlArticleData>();
@@ -84,7 +89,7 @@ namespace Blog
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");             
+                app.UseExceptionHandler("/PageNotFound");             
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -97,14 +102,15 @@ namespace Blog
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                           "forumCategory",
-                           "f/{name:minlength(3)}",
-                           new { controller = "Home", action = "Details" });
+                //endpoints.MapControllerRoute(
+                //           "forumCategory",
+                //           "f/{name:minlength(3)}",
+                //           new { controller = "Home", action = "Details" });
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");               
                 endpoints.MapRazorPages();
+
             });
         }
     }

@@ -64,7 +64,9 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     background-image: url(../images/website-design-slider-background-stockton.jpg); 
-    background-size: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .footer {
