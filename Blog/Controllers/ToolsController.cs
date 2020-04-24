@@ -39,10 +39,19 @@ namespace Blog.Controllers
 
         public IActionResult IpLookUpPOST(ToolsViewModel toolsViewModel)
         {
-            ToolsViewModel model = new ToolsViewModel();
-            model.Website = toolsViewModel.Website;
-            ViewData["Ip"] = _tools.IpLookUp(model.Website);
-            return View(model);
+            try
+            {
+                ToolsViewModel model = new ToolsViewModel();
+                model.Website = toolsViewModel.Website;
+                ViewData["Ip"] = _tools.IpLookUp(model.Website);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                ViewData["Ip"] = "Input correct url! Only domain.";
+                return View();
+            }
+          
         }
 
         public IActionResult WhatsMyIp()
